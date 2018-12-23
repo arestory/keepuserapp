@@ -1,3 +1,4 @@
+# coding=UTF-8
 from urllib import request
 def _schedule(a, b, c):
     '''''

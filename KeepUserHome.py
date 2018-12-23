@@ -1,3 +1,4 @@
+# coding=UTF-8
 import pymysql.cursors
 import json
 import requests

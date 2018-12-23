@@ -22,7 +22,7 @@ insert_train_sql = '''INSERT ignore  INTO KEEP_TRAIN (item_id,author_id,author_n
 
 query_user_sql = '''
 
-select birthday,country,city,joinTime,nationCode,citycode,province from keep_user where userid ='%s' limit 1
+select birthday,country,city,joinTime,nationCode,citycode,province from KEEP_USER_INFO where userid ='%s' limit 1
 '''
 
 

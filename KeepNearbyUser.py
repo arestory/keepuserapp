@@ -14,10 +14,10 @@ cursor = db.cursor()
 mLat = 29.505631282400714
 mLng = 110.35738281250194
 # https://api.gotokeep.com/social/v4/geo/nearby/people?lat=22.709620939085166&lon=113.80505583018066
-insert_user_sql = '''INSERT ignore INTO KEEP_USER_INFO (userid,name,birthday,country,province,city,district,gender,jointime,nationCode,citycode,bio,avatar,totalDuration,runningDistance,weight,bmi)
+insert_user_sql = '''INSERT ignore INTO keep_user_info (userid,name,birthday,country,province,city,district,gender,jointime,nationCode,citycode,bio,avatar,totalDuration,runningDistance,weight,bmi)
                 VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
 
-insert_train_sql = '''INSERT ignore  INTO KEEP_TRAIN (item_id,author_id,author_name,content,tags,latitude,longitude,images,created,photo)
+insert_train_sql = '''INSERT ignore  INTO keep_train (item_id,author_id,author_name,content,tags,latitude,longitude,images,created,photo)
                  VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
 
 query_user_sql = '''

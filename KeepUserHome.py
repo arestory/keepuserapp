@@ -12,7 +12,7 @@ user_home_url = 'https://api.gotokeep.com/social/v5/people/home/?userId=%s'
 insert_train_sql = '''INSERT ignore  INTO KEEP_TRAIN (item_id,author_id,author_name,content,tags,latitude,longitude,images,created,photo)
                  VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
 
-query_userid_list_sql = 'select userid from keep_user order by joinTime desc limit %s,%s'
+query_userid_list_sql = 'select userid from keep_user_info order by joinTime desc limit %s,%s'
 db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 
@@ -177,4 +177,4 @@ def query(start, end):
         index = index + 1
     query(end + 1, end + 6000)
 
-query(12000, 16600)
+query(16000, 19000)

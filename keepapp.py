@@ -8,6 +8,7 @@ from flask import make_response
 
 from pyecharts import Map, Pie, Bar,Line,Geo
 from datasource import UserDatasource
+# coding=UTF-8
 
 app = Flask(__name__, static_url_path='')
 # 必须指定cursorclass，否则查询的返回结果不包含字段

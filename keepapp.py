@@ -16,11 +16,11 @@ app = Flask(__name__, static_url_path='')
 db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 
-query_user_info_sql = 'select * from keep_user where userid = "%s"'
-query_user_num_sql = 'select count(*) from keep_user'
-query_user_list_sql = 'select * from keep_user limit %s,%s'
+query_user_info_sql = 'select * from keep_user_info where userid = "%s"'
+query_user_num_sql = 'select count(*) from keep_user_info'
+query_user_list_sql = 'select * from keep_user_info limit %s,%s'
 query_user_train_list_sql = 'select * from keep_train where author_id = "%s"'
-query_wx_user_list_sql = 'select * from keep_user where bio like "%%微信%%" and gender ="F" limit %s,%s'
+query_wx_user_list_sql = 'select * from keep_user_info where bio like "%%微信%%" and gender ="F" limit %s,%s'
 query_top_train_list_sql = 'select * from keep_train limit %s,%s'
 query_geo_train_list_sql = 'select * from keep_train where length(latitude)>0 limit %s,%s'
 

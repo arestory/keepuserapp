@@ -231,10 +231,10 @@ function getKeepTrain(){
                     //  setTimeout(funname,300*index)
                 }
             }
-             console.log(data)
-            // loadMuchPoints(data)
-            loadHeatMap(lnglatData)
             lnglatList = lnglatData
+             console.log(data)
+            loadMuchPoints(data)
+            // loadHeatMap(lnglatData)
             // loadtsvHeatMap(lnglatData)
         }
 

@@ -5,6 +5,7 @@ from flask import request
 from flask import Blueprint, render_template, send_file, send_from_directory
 import numpy
 import pymysql.cursors
+import requests
 import json
 from flask import make_response
 
@@ -85,6 +86,100 @@ def api_get_age_range():
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
+
+def insert_user(keepuser):
+    query_user_sql = '''
+
+    select birthday,country,city,joinTime,nationCode,citycode,province from KEEP_USER_INFO where userid ='%s' limit 1
+    '''
+    insert_user_sql = '''INSERT ignore INTO keep_user_info (userid,name,birthday,country,province,city,district,gender,jointime,nationCode,citycode,bio,avatar,totalDuration,runningDistance,weight,bmi)
+                    VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
+    try:
+        db.ping(reconnect=True)
+        userid = keepuser.get('_id')
+        cursor.execute(query_user_sql % userid)
+        olduser = cursor.fetchone()
+        if olduser:
+            birthday = olduser['birthday']
+            if len(birthday) == 0 or birthday == 'None':
+                birthday = keepuser.get('birthday')
+            country = olduser['country']
+            if country == '' or country == 'None':
+                country = keepuser.get('country')
+            city = olduser['city']
+            if city == '' or city == 'None':
+                city = keepuser.get('city')
+            joinTime = olduser['joinTime']
+            if joinTime == '' or joinTime == 'None':
+                joinTime = keepuser.get('joinTime')
+            nationCode = olduser['nationCode']
+            if nationCode == '' or nationCode == 'None':
+                nationCode = keepuser.get('nationCode')
+            citycode = olduser['citycode']
+            if citycode == '' or citycode == 'None':
+                citycode = keepuser.get('citycode')
+            province = olduser['province']
+            if province == '' or province == 'None':
+                province = keepuser.get('province')
+        else:
+            birthday = keepuser.get('birthday')
+            country = keepuser.get('country')
+            city = keepuser.get('city')
+            joinTime = keepuser.get('joinTime')
+            nationCode = keepuser.get('nationCode')
+            citycode = keepuser.get('citycode')
+            province = keepuser.get('province')
+
+        oldrecord = ''
+        # print("insertdata,", keepuser.get('username'))
+        data = (keepuser.get('_id'), keepuser.get('username'), birthday, country,
+                province,
+                city, keepuser.get('district'), keepuser.get('gender'),
+                joinTime,
+                nationCode, citycode, keepuser.get('bio').replace("'", "—"),
+                keepuser.get('avatar'), keepuser.get('totalDuration'), keepuser.get('runningDistance'),
+                keepuser.get('weight'), keepuser.get('bmi'))
+        result = cursor.execute(insert_user_sql % data)
+        db.commit()
+        if result == 1:
+            print("插入一条新用户数据")
+
+    except Exception as e:
+        print(e)
+    # getUserEntries(keepuser.get('_id'),"")
+
+@app.route('/nearby/')
+def api_get_nearby_people():
+    db.ping(reconnect=True)
+    lat = request.args.get("lat")
+    lng = request.args.get("lng")
+    try:
+        url = 'https://api.gotokeep.com/social/v4/geo/nearby/people?lat=%s&lon=%s' % (lat, lng)
+        r = requests.get(url)
+        content = r.content.decode('utf-8')
+        print(url)
+        # print(content)
+        data = json.loads(content)
+        users = data['data']['users']
+
+        index = 0
+        for user in users:
+            index = index + 1
+            # print(user['user'])
+
+            item = user['user']
+            userProfile = user['userProfile']
+            item['totalDuration'] = userProfile.get('totalDuration')
+            item['runningDistance'] = userProfile.get('runningDistance')
+            item['weight'] = userProfile.get('weight')
+            item['bmi'] = userProfile.get('bmi')
+
+            insert_user(item)
+            # threading.Timer(15, function=getUserEntries, args=[user['user']['_id'],""]).start()
+
+    except Exception as e:
+        pass
+    pass
 
 @app.route('/user_age_static')
 def get_age_static():

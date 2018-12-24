@@ -26,11 +26,11 @@ query_geo_train_list_sql = 'select * from keep_train where length(latitude)>0 li
 
 query_age_range_sql = '''
  select count(*) as count from
-        (select cast(left(birthday,4) as SIGNED INTEGER) as bd FROM keep_user where birthday NOT LIKE '1900%%' and birthday != 'None')  
+        (select cast(left(birthday,4) as SIGNED INTEGER) as bd FROM keep_user_info where birthday NOT LIKE '1900%%' and birthday != 'None')  
         t where t.bd >= %s and t.bd< %s
 '''
 query_city_users_sql = '''
-select count(*) as count from keep_user where citycode = '%s'
+select count(*) as count from keep_user_info where citycode = '%s'
 '''
 
 query_province_users_sql = '''
@@ -57,6 +57,21 @@ select province ,count(*) as count from keep_user_info where length(province)>0 
 #  Response instance, or WSGI callable, but it was a dict.
 @app.route('/user_age_range/', methods=['GET'])
 def get_age_range():
+    db.ping(reconnect=True)
+    start = request.args.get("start")
+    end = request.args.get("end")
+    sql = query_age_range_sql % (int(start), int(end))
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    result = json.dumps(result, ensure_ascii=False)
+
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
+    return make_response(result)
+
+@app.route('/api/user_age_range/', methods=['GET'])
+def api_get_age_range():
     db.ping(reconnect=True)
     start = request.args.get("start")
     end = request.args.get("end")

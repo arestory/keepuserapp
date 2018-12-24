@@ -148,7 +148,7 @@ def insert_user(keepuser):
         print(e)
     # getUserEntries(keepuser.get('_id'),"")
 
-@app.route('/nearby/')
+@app.route('/nearby')
 def api_get_nearby_people():
     db.ping(reconnect=True)
     lat = request.args.get("lat")
@@ -176,10 +176,9 @@ def api_get_nearby_people():
 
             insert_user(item)
             # threading.Timer(15, function=getUserEntries, args=[user['user']['_id'],""]).start()
-
+        return makeResponse(content)
     except Exception as e:
-        pass
-    pass
+        return "出现异常" % e
 
 @app.route('/user_age_static')
 def get_age_static():

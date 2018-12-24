@@ -192,7 +192,7 @@ function getKeepTrain(){
     $.ajax({
 
         //callback=jQuery2140990458214547516_1543977083173&_=1543977083174
-        url:'http://arestory.info:9090/trains/geo/1/90000',
+        url:'http://arestory.info:9090/trains/geo/1/30000',
         dataType:'jsonp',
         jsonp:"jsonpCallback",
         jsonpCallback:"success_jsonpCallback",

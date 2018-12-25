@@ -24,7 +24,7 @@ query_user_train_list_sql = 'select * from keep_train where author_id = "%s"'
 query_wx_user_list_sql = 'select * from keep_user_info where bio like "%%微信%%" and gender ="F" limit %s,%s'
 query_top_train_list_sql = 'select * from keep_train limit %s,%s'
 query_geo_train_list_sql = 'select * from keep_train where length(latitude)>0 limit %s,%s'
-
+query_nearby_trains_sql= 'select * from keep_train where length(latitude)>0 and (%s-latitude)<=0.01 and (%s-longitude)<=0.01 limit %s,%s'
 query_age_range_sql = '''
  select count(*) as count from
         (select cast(left(birthday,4) as SIGNED INTEGER) as bd FROM keep_user_info where birthday NOT LIKE '1900%%' and birthday != 'None')  
@@ -52,7 +52,21 @@ query_province_users_count_sql = '''
 select province ,count(*) as count from keep_user_info where length(province)>0   and country="中国" group by province order by length(province)
 '''
 
-
+@app.route('/nearby_trains')
+def get_nearby_trains():
+    db.ping(reconnect=True)
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+    start = request.args.get('start') 
+    end = request.args.get('end')
+    sql = query_nearby_trains_sql % (lat,lng,start,end) 
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    if len(result)>0:
+       result = json.dumps(result,ensure_ascii=False)
+       return make_response(result)    
+    result = 'no result'
+    return make_response(result)
 # The view function did not return a valid response.
 # The return type must be a string, tuple,
 #  Response instance, or WSGI callable, but it was a dict.
@@ -396,7 +410,7 @@ def get_top_trains(page, count):
     if row > 0:
         result = json.dumps(cursor.fetchall(), ensure_ascii=False)
     else:
-        result = "没有更多用户"
+        result = "没有更多"
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)

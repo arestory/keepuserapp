@@ -72,14 +72,14 @@ def getUserInfo(userid):
         pass
 
 
-# cursor.execute(query_userid__None_birthday_list_sql)
-# userIdList = cursor.fetchall()
-# print("有%s用户没有生日" % len(userIdList))
-# index = 1
-# for userid in userIdList:
-#     getUserInfo(userid['userid'])
-#     time.sleep(2)
-#     pass
+cursor.execute(query_userid__None_birthday_list_sql)
+userIdList = cursor.fetchall()
+print("有%s用户没有生日" % len(userIdList))
+index = 1
+for userid in userIdList:
+    getUserInfo(userid['userid'])
+    time.sleep(2)
+    pass
 
 
 # for userid in up-map-div
@@ -177,4 +177,4 @@ def query(start, end):
         index = index + 1
     query(end + 1, end + 6000)
 
-query(16000, 19000)
+# query(16000, 19000)

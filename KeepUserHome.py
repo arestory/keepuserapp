@@ -17,7 +17,7 @@ db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4',
 cursor = db.cursor()
 
 update_user_info_sql = 'UPDATE keep_user_info SET birthday = "%s",country ="%s",city="%s",joinTime="%s",nationCode="%s",citycode="%s",province="%s" WHERE userid = "%s"'
-query_userid__None_birthday_list_sql = 'select userid from keep_user_info where birthday ="None" or length(birthday)=0'
+query_userid__None_birthday_list_sql = 'select userid from keep_user_info where birthday ="None" or length(birthday)=0 limit "%s","%s"'
 
 query_birthday = '''
 
@@ -72,14 +72,20 @@ def getUserInfo(userid):
         pass
 
 
-cursor.execute(query_userid__None_birthday_list_sql)
-userIdList = cursor.fetchall()
-print("有%s用户没有生日" % len(userIdList))
-index = 1
-for userid in userIdList:
-    getUserInfo(userid['userid'])
-    time.sleep(2)
-    pass
+
+
+def updateUser(start,end):
+    cursor.execute(query_userid__None_birthday_list_sql % (start,end))
+    userIdList = cursor.fetchall()
+    print("有%s用户没有生日" % len(userIdList))
+    index = 1
+    for userid in userIdList:
+        getUserInfo(userid['userid'])
+        time.sleep(2)
+        pass
+    updateUser(end+1,end+100)
+
+updateUser(0,100)
 
 
 # for userid in up-map-div

@@ -31,7 +31,6 @@ rihantv = tvTag + "rihantv/"
 oumeitv = tvTag + "oumeitv/"
 
 
-
 # 搜索
 @app.route("/search/<type>/<keyword>")
 def search(type, keyword):
@@ -53,7 +52,7 @@ def search(type, keyword):
     soup = BeautifulSoup(html, "html.parser")
     root = soup.find("div", class_="co_content8")
     bList = root.find_all("b")
-    resultJson={}
+    resultJson = {}
     if typeid == 2:
         map = []
         for b in bList:
@@ -82,6 +81,7 @@ def search(type, keyword):
 
     result = json.dumps(resultJson, ensure_ascii=False)
     return make_response(result)
+
 
 # 获取电影列表
 @app.route('/get_movies')
@@ -172,6 +172,7 @@ def get_tv_list():
     result = json.dumps(resultJson, ensure_ascii=False)
     return make_response(result)
 
+
 # 影视想去
 @app.route("/movie/detail")
 def get_video_detail():
@@ -203,15 +204,22 @@ def get_video_detail():
             pList = span.find_all('p')
             if len(pList) > 0:
                 for item in pList:
-                    content = item.contents[0].strip()
-                    if len(content) > 0:
-                        desc.append(content)
+                    content = item.contents[0]
+                    try:
+                        if len(content) > 0:
+                            desc.append(content.strip())
+                    except Exception as e:
+                        print(e)
+                        pass
         else:
-            for item in contents:
-                if type(item).__name__ == 'NavigableString' and len(item) > 0:
-                    item = item.strip()
-                    if len(item) > 0:
-                        desc.append(item)
+            try:
+                for item in contents:
+                    if type(item).__name__ == 'NavigableString' and len(item) > 0:
+                        item = item.strip()
+                        if len(item) > 0:
+                            desc.append(item)
+            except Exception as e:
+                print(e)
 
         pass
     actressIndex = 0

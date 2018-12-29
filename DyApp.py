@@ -83,6 +83,42 @@ def search(type, keyword):
     return make_response(result)
 
 
+@app.route('/get_zhongyi')
+def get_zhongyi():
+
+    # 页码
+    pageIndex = request.args.get("index")
+    if not pageIndex:
+        pageIndex = "index.html"
+    url = "https://www.dytt8.net/html/zongyi2013/" + pageIndex
+    r = requests.get(url)
+    decode = requests.utils.get_encodings_from_content(r.text)
+    print(decode)
+    r.encoding = "GBK"
+    html = r.text
+    soup = BeautifulSoup(html, "html.parser")
+    root = soup.find("div", class_="co_content8")
+    bList = root.find_all("b")
+    map = []
+    for b in bList:
+        a = b.find_all('a')[1]
+        href = a.attrs['href']
+        name = a.get_text()
+        obj = {"name": name, "href": href}
+        map.append(obj)
+    x = soup.find_all("div", class_="x")[1]
+    x = x.find_all('a')
+    resultJson = {'list': map}
+    for a in x:
+        text = a.get_text()
+        if text == '下一页':
+            href = a['href']
+            print(href)
+            print(text)
+            resultJson['nextpage'] = href
+    result = json.dumps(resultJson, ensure_ascii=False)
+    return make_response(result)
+
 # 获取电影列表
 @app.route('/get_movies')
 def get_movie_list():
@@ -185,7 +221,7 @@ def get_video_detail():
     html = r.text
     soup = BeautifulSoup(html, "html.parser")
     root = soup.find(id="Zoom")
-    if not root :
+    if not root:
         url = "https://www.ygdy8.com/" + pageUrl
         r = requests.get(url)
         decode = requests.utils.get_encodings_from_content(r.text)
@@ -201,7 +237,8 @@ def get_video_detail():
     for item in trList:
         a = item.find('td').find('a')
         href = a['href']
-        downloadList.append(href)
+        if len(href) > 0 and (href.__contains__('http') or href.__contains__('ftp') or href.__contains__('magnet')):
+            downloadList.append(href)
         print(href)
     pList = root.find_all('p')
     spanList = root.find_all('span')

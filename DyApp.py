@@ -185,6 +185,16 @@ def get_video_detail():
     html = r.text
     soup = BeautifulSoup(html, "html.parser")
     root = soup.find(id="Zoom")
+    if not root :
+        url = "https://www.ygdy8.com/" + pageUrl
+        r = requests.get(url)
+        decode = requests.utils.get_encodings_from_content(r.text)
+        print(decode)
+        r.encoding = "GBK"
+        html = r.text
+        soup = BeautifulSoup(html, "html.parser")
+        root = soup.find(id="Zoom")
+
     coverImg = root.find('img')['src']
     trList = root.find_all('tr')
     downloadList = []

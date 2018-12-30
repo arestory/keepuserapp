@@ -85,7 +85,7 @@ def updateUser(start,end):
         pass
     updateUser(end+1,end+100)
 
-updateUser(0,100)
+# updateUser(0,100)
 
 
 # for userid in up-map-div
@@ -183,4 +183,4 @@ def query(start, end):
         index = index + 1
     query(end + 1, end + 6000)
 
-# query(16000, 19000)
+query(30000, 33000)

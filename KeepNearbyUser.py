@@ -9,7 +9,7 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,cursorclass=pymysql.cursors.DictCursor)
+db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 # 22.7964393209,113.4228515625 广州
 mLat = 29.505631282400714

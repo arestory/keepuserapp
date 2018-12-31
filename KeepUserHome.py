@@ -13,7 +13,7 @@ insert_train_sql = '''INSERT ignore  INTO KEEP_TRAIN (item_id,author_id,author_n
                  VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
 
 query_userid_list_sql = 'select userid from keep_user_info order by joinTime limit %s,%s'
-db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,cursorclass=pymysql.cursors.DictCursor)
+db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 
 update_user_info_sql = 'UPDATE keep_user_info SET birthday = "%s",country ="%s",city="%s",joinTime="%s",nationCode="%s",citycode="%s",province="%s" WHERE userid = "%s"'

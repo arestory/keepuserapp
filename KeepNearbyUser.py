@@ -9,7 +9,7 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 # 22.7964393209,113.4228515625 广州
 mLat = 29.505631282400714
@@ -124,7 +124,7 @@ def createRandomLatLng():
 lastDownload = 0
 
 
-def try_get_geo_user(lat, lng):
+def try_get_geo_user_only(lat, lng):
     try:
         url = 'https://api.gotokeep.com/social/v4/geo/nearby/people?lat=%s&lon=%s' % (lat, lng)
         r = requests.get(url)
@@ -148,6 +148,13 @@ def try_get_geo_user(lat, lng):
 
             insert_user(item)
             # threading.Timer(15, function=getUserEntries, args=[user['user']['_id'],""]).start()
+    except Exception as e:
+        pass
+    pass
+
+def try_get_geo_user(lat, lng):
+    try:
+        try_get_geo_user_only(lat,lng)
 
         if total.count < 10000:
             # time.sleep(2)

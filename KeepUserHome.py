@@ -12,8 +12,8 @@ user_home_url = 'https://api.gotokeep.com/social/v5/people/home/?userId=%s'
 insert_train_sql = '''INSERT ignore  INTO KEEP_TRAIN (item_id,author_id,author_name,content,tags,latitude,longitude,images,created,photo)
                  VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
 
-query_userid_list_sql = 'select userid from keep_user_info order by joinTime desc limit %s,%s'
-db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+query_userid_list_sql = 'select userid from keep_user_info order by joinTime limit %s,%s'
+db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 
 update_user_info_sql = 'UPDATE keep_user_info SET birthday = "%s",country ="%s",city="%s",joinTime="%s",nationCode="%s",citycode="%s",province="%s" WHERE userid = "%s"'
@@ -176,11 +176,11 @@ def query(start, end):
     index = -1
     for userid in userids:
         id = userid['userid']
-        print("正在查询" + userid['userid'])
+        print("正在查询" + userid['userid']+",当前页数："+start)
         getUserEntries(id, "")
         if index % 3 == 0:
             time.sleep(5)
         index = index + 1
-    query(end + 1, end + 6000)
+    query(end + 1, end + 1000)
 
-query(30000, 33000)
+query(1, 1000)

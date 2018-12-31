@@ -9,12 +9,13 @@ import requests
 import json
 from flask import make_response
 
-from pyecharts import Map, Pie, Bar,Line,Geo
+from pyecharts import Map, Pie, Bar, Line, Geo
 from datasource import UserDatasource
 
 app = Flask(__name__, static_url_path='')
 # 必须指定cursorclass，否则查询的返回结果不包含字段
-db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,
+                     cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 
 query_user_info_sql = 'select * from keep_user_info where userid = "%s"'
@@ -24,7 +25,7 @@ query_user_train_list_sql = 'select * from keep_train where author_id = "%s"'
 query_wx_user_list_sql = 'select * from keep_user_info where bio like "%%微信%%" and gender ="F" limit %s,%s'
 query_top_train_list_sql = 'select * from keep_train limit %s,%s'
 query_geo_train_list_sql = 'select * from keep_train where length(latitude)>0 limit %s,%s'
-query_nearby_trains_sql= 'select * from keep_train where length(latitude)>0 and (%s-latitude)<=0.01 and (%s-longitude)<=0.01 limit %s,%s'
+query_nearby_trains_sql = 'select * from keep_train where length(latitude)>0 and (%s-latitude)<=0.01 and (%s-longitude)<=0.01 limit %s,%s'
 query_age_range_sql = '''
  select count(*) as count from
         (select cast(left(birthday,4) as SIGNED INTEGER) as bd FROM keep_user_info where birthday NOT LIKE '1900%%' and birthday != 'None')  
@@ -52,21 +53,31 @@ query_province_users_count_sql = '''
 select province ,count(*) as count from keep_user_info where length(province)>0   and country="中国" group by province order by length(province)
 '''
 
+insert_user_sql = '''INSERT ignore INTO keep_user_info (userid,name,birthday,country,province,city,district,gender,jointime,nationCode,citycode,bio,avatar,totalDuration,runningDistance,weight,bmi)
+                VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
+
+
+
+
+
+
 @app.route('/nearby_trains')
 def get_nearby_trains():
     db.ping(reconnect=True)
     lat = request.args.get('lat')
     lng = request.args.get('lng')
-    start = request.args.get('start') 
+    start = request.args.get('start')
     end = request.args.get('end')
-    sql = query_nearby_trains_sql % (lat,lng,start,end) 
+    sql = query_nearby_trains_sql % (lat, lng, start, end)
     cursor.execute(sql)
     result = cursor.fetchall()
-    if len(result)>0:
-       result = json.dumps(result,ensure_ascii=False)
-       return make_response(result)    
+    if len(result) > 0:
+        result = json.dumps(result, ensure_ascii=False)
+        return make_response(result)
     result = 'no result'
     return make_response(result)
+
+
 # The view function did not return a valid response.
 # The return type must be a string, tuple,
 #  Response instance, or WSGI callable, but it was a dict.
@@ -84,6 +95,7 @@ def get_age_range():
     if jsonp:
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
+
 
 @app.route('/api/user_age_range/', methods=['GET'])
 def api_get_age_range():
@@ -162,6 +174,7 @@ def insert_user(keepuser):
         print(e)
     # getUserEntries(keepuser.get('_id'),"")
 
+
 @app.route('/nearby')
 def api_get_nearby_people():
     db.ping(reconnect=True)
@@ -193,6 +206,7 @@ def api_get_nearby_people():
         return makeResponse(content)
     except Exception as e:
         return "出现异常" % e
+
 
 @app.route('/user_age_static')
 def get_age_static():
@@ -446,7 +460,6 @@ def main():
 userDs = UserDatasource()
 
 
-
 @app.route('/charts/user_country_data')
 def get_country_user_data():
     pie = Pie('全国用户分布')
@@ -640,6 +653,7 @@ def get_user_year():
     line.render(fileName)
     return send_file(fileName)
 
+
 def get_user_month_line_data_of_year(year):
     result = userDs.get_user_month_of_year(year)
     labels = []
@@ -651,6 +665,8 @@ def get_user_month_line_data_of_year(year):
         count.append(user_count)
         total = user_count + total
     return labels, count, total
+
+
 @app.route("/new_user_year_all")
 def new_user_year_all():
     result_2015 = get_user_month_line_data_of_year(2015)
@@ -658,19 +674,26 @@ def new_user_year_all():
     result_2017 = get_user_month_line_data_of_year(2017)
     result_2018 = get_user_month_line_data_of_year(2018)
 
-    line = Line("新增用户趋势" )
-    line.add('2015新增用户趋势', result_2015[0], result_2015[1], mark_line=["average"],is_smooth=True, mark_point=["max", "min"])
-    line.add('2016新增用户趋势', result_2016[0], result_2016[1], mark_line=["average"],is_smooth=True, mark_point=["max", "min"])
-    line.add('2017新增用户趋势', result_2017[0], result_2017[1], mark_line=["average"],is_smooth=True, mark_point=["max", "min"])
-    line.add('2018新增用户趋势', result_2018[0], result_2018[1], mark_line=["average"],is_smooth=True, mark_point=["max", "min"])
+    line = Line("新增用户趋势")
+    line.add('2015新增用户趋势', result_2015[0], result_2015[1], mark_line=["average"], is_smooth=True,
+             mark_point=["max", "min"])
+    line.add('2016新增用户趋势', result_2016[0], result_2016[1], mark_line=["average"], is_smooth=True,
+             mark_point=["max", "min"])
+    line.add('2017新增用户趋势', result_2017[0], result_2017[1], mark_line=["average"], is_smooth=True,
+             mark_point=["max", "min"])
+    line.add('2018新增用户趋势', result_2018[0], result_2018[1], mark_line=["average"], is_smooth=True,
+             mark_point=["max", "min"])
     # bar.show_config()
     fileName = 'user_join_data.html'
     line.render(fileName)
     return send_file(fileName)
+
+
 @app.route('/usermap')
 def get_user_map():
     fileName = 'static/keepmap.html'
     return send_file(fileName)
+
 
 @app.route('/user/duration')
 def get_user_duration():
@@ -686,6 +709,7 @@ def get_user_duration():
     fileName = 'user_duration_data.html'
     pie.render(fileName)
     return send_file(fileName)
+
 
 @app.route('/user/distance')
 def get_user_dis():
@@ -715,7 +739,7 @@ def get_user_month_of_year(year):
         count.append(user_count)
         total = user_count + total
     line = Line("%s年新增用户月份分布" % year)
-    line.add("%s年新增用户月份分布" % year, labels, count, mark_line=["average"],is_smooth=True, mark_point=["max", "min"])
+    line.add("%s年新增用户月份分布" % year, labels, count, mark_line=["average"], is_smooth=True, mark_point=["max", "min"])
     # bar.show_config()
     fileName = 'user_join_data.html'
     line.render(fileName)

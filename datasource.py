@@ -7,8 +7,9 @@ import numpy
 
 class UserDatasource(object):
     # 必须指定self.cursorclass，否则查询的返回结果不包含字段
-    db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4',
+    db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,
                          cursorclass=pymysql.cursors.DictCursor)
+
     cursor = db.cursor()
 
     birthday_sql = '''
@@ -42,6 +43,68 @@ class UserDatasource(object):
 
     count_user_duration_sql = 'select * from(select count(*) as count,totalDuration as duration from keep_user_info where totalDuration !="None" and totalDuration>0 group by totalDuration) t order by t.duration desc;'
 
+    insert_user_sql = '''INSERT ignore INTO keep_user_info (userid,name,birthday,country,province,city,district,gender,jointime,nationCode,citycode,bio,avatar,totalDuration,runningDistance,weight,bmi)
+                    VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
+
+    query_user_sql = '''
+
+    select birthday,country,city,joinTime,nationCode,citycode,province from KEEP_USER_INFO where userid ='%s' limit 1
+    '''
+
+    def insert_user(self,keepuser):
+        try:
+            self.db.ping(reconnect=True)
+            userid = keepuser.get('_id')
+            self.cursor.execute(self.query_user_sql % userid)
+            olduser = self.cursor.fetchone()
+            if olduser:
+                birthday = olduser['birthday']
+                if len(birthday) == 0 or birthday == 'None':
+                    birthday = keepuser.get('birthday')
+                country = olduser['country']
+                if country == '' or country == 'None':
+                    country = keepuser.get('country')
+                city = olduser['city']
+                if city == '' or city == 'None':
+                    city = keepuser.get('city')
+                joinTime = olduser['joinTime']
+                if joinTime == '' or joinTime == 'None':
+                    joinTime = keepuser.get('joinTime')
+                nationCode = olduser['nationCode']
+                if nationCode == '' or nationCode == 'None':
+                    nationCode = keepuser.get('nationCode')
+                citycode = olduser['citycode']
+                if citycode == '' or citycode == 'None':
+                    citycode = keepuser.get('citycode')
+                province = olduser['province']
+                if province == '' or province == 'None':
+                    province = keepuser.get('province')
+            else:
+                birthday = keepuser.get('birthday')
+                country = keepuser.get('country')
+                city = keepuser.get('city')
+                joinTime = keepuser.get('joinTime')
+                nationCode = keepuser.get('nationCode')
+                citycode = keepuser.get('citycode')
+                province = keepuser.get('province')
+
+            oldrecord = ''
+            # print("insertdata,", keepuser.get('username'))
+            data = (keepuser.get('_id'), keepuser.get('username'), birthday, country,
+                    province,
+                    city, keepuser.get('district'), keepuser.get('gender'),
+                    joinTime,
+                    nationCode, citycode, keepuser.get('bio').replace("'", "—"),
+                    keepuser.get('avatar'), keepuser.get('totalDuration'), keepuser.get('runningDistance'),
+                    keepuser.get('weight'), keepuser.get('bmi'))
+            result = self.cursor.execute(self.insert_user_sql % data)
+            self.db.commit()
+            if result == 1:
+                print("插入一条新用户数据")
+
+        except Exception as e:
+            print(e)
+        # getUserEntries(keepuser.get('_id'),"")
     def count_user_duration2(self):
         self.cursor.execute(self.count_user_duration_sql)
         result = self.cursor.fetchall()

@@ -176,7 +176,7 @@ def query(start, end):
     index = -1
     for userid in userids:
         id = userid['userid']
-        print("正在查询" + userid['userid']+",当前页数："+start)
+        print("正在查询" + userid['userid']+",当前页数：%s" % start)
         getUserEntries(id, "")
         if index % 3 == 0:
             time.sleep(5)

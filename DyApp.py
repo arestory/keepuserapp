@@ -80,6 +80,9 @@ def search(type, keyword):
         resultJson = {'list': map}
 
     result = json.dumps(resultJson, ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
 
@@ -117,6 +120,9 @@ def get_zhongyi():
             print(text)
             resultJson['nextpage'] = href
     result = json.dumps(resultJson, ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
 # 获取电影列表
@@ -162,6 +168,9 @@ def get_movie_list():
             print(text)
             resultJson['nextpage'] = href
     result = json.dumps(resultJson, ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
 
@@ -206,6 +215,9 @@ def get_tv_list():
             print(text)
             resultJson['nextpage'] = href
     result = json.dumps(resultJson, ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
 
@@ -299,6 +311,9 @@ def get_video_detail():
     result = {"coverImg": coverImg, "downloadList": downloadList, "desc": infoList}
     result = json.dumps(result, ensure_ascii=False)
 
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
 

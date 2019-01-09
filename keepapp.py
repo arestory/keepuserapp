@@ -398,7 +398,7 @@ def get_user_list(page, count):
         return "%s(%s)" % (jsonp, result)
     return makeResponse(result)
 
-@app.route('/usertrins/<id>', methods=['GET'])
+@app.route('/usertrains/<id>', methods=['GET'])
 def get_user_train_list(id):
     db.ping(reconnect=True)
     sql = query_user_train_list_sql % id

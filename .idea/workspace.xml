@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66a18558-65e1-45f3-940b-61c6a91f5188" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/datasource.py" beforeDir="false" afterPath="$PROJECT_DIR$/datasource.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keepapp.py" beforeDir="false" afterPath="$PROJECT_DIR$/keepapp.py" afterDir="false" />
-    </list>
+    <list default="true" id="66a18558-65e1-45f3-940b-61c6a91f5188" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,8 +79,8 @@
       <file leaf-file-name="keepapp.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keepapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="410" column="28" lean-forward="true" selection-start-line="410" selection-start-column="28" selection-end-line="410" selection-end-column="28" />
+            <state relative-caret-position="175">
+              <caret line="400" column="22" selection-start-line="400" selection-start-column="13" selection-end-line="400" selection-end-column="22" />
               <folding>
                 <element signature="e#16#39#0" expanded="true" />
               </folding>
@@ -477,8 +474,8 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3825641" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35557872" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.2523462" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.35557872" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.2523462" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1935287" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -820,8 +817,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/keepapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="410" column="28" lean-forward="true" selection-start-line="410" selection-start-column="28" selection-end-line="410" selection-end-column="28" />
+        <state relative-caret-position="175">
+          <caret line="400" column="22" selection-start-line="400" selection-start-column="13" selection-end-line="400" selection-end-column="22" />
           <folding>
             <element signature="e#16#39#0" expanded="true" />
           </folding>

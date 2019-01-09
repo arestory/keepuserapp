@@ -126,42 +126,49 @@ class UserDatasource(object):
         if data.get('info'):
             items = data['info']
             for item in items:
-                train = Train()
-                train.id = item["_id"]
-                train.author_id = item['author']["_id"]
-                train.author_name = item['author']["username"]
-                train.content = item["content"]
+                train = {'id': item["_id"], 'author_id': item['author']["_id"],
+                         'author_name': item['author']["username"], 'content': item["content"]}
                 tags = item['hashTags']
+
+                trainItem = Train()
+                trainItem.id = train['id']
+                trainItem.author_id = train['author_id']
+                trainItem.author_name = train['author_name']
+                trainItem.content = train['content']
                 tags_str = ""
                 if len(tags) > 0:
                     for tag in tags:
                         tags_str = tags_str + tag + ","
-                train.tags = tags_str
+                train['tags'] = tags_str
 
+                trainItem.tags = tags_str
                 geo = item['geo']
                 if len(geo) > 0:
-                    train.latitude = geo[0]
-                    train.longitude = geo[1]
-                train.longitude = ''
-                train.latitude = ''
+                    train['latitude'] = geo[0]
+                    train['longitude'] = geo[1]
+                train['longitude'] = ''
+                train['latitude'] = ''
                 if len(geo) == 2:
-                    train.longitude = geo[0]
-                    train.latitude = geo[1]
+                    train['longitude'] = geo[0]
+                    train['latitude'] = geo[1]
                 imgs_str = ''
+                trainItem.latitude=train['latitude']
+                trainItem.longitude=train['longitude']
                 try:
                     images = item['images']
                     if len(images) > 0:
                         for img in images:
                             imgs_str = img + "," + imgs_str
 
-                    train.photo = item['photo']
+                    train['photo'] = item['photo']
+                    trainItem.photo =  item['photo']
                 except Exception as e:
                     pass
-                train.created = item['created']
-
-                train.images = imgs_str
-
-                self.insert_train(train)
+                train['created'] = item['created']
+                trainItem.created=item['created']
+                train['images'] = imgs_str
+                trainItem.images=imgs_str
+                self.insert_train(trainItem)
                 result.append(train)
         else:
             print(userId + "的列表已爬取完毕")

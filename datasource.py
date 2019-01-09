@@ -112,9 +112,13 @@ class UserDatasource(object):
         else:
             print(userId + "的列表已爬取完毕")
 
-    def getUserEntryList(self, userId, lastId):
+    def getUserEntryList(self, userId, lastId=""):
+        url = "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry"
+        if len(lastId)>0:
+            url = "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry&lastId=" + lastId
+
         r = requests.get(
-            "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry&lastId=" + lastId)
+            url)
         content = r.content.decode('utf-8')
         js = json.loads(content)
         result = []

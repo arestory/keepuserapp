@@ -405,7 +405,7 @@ def get_user_train_list(id):
     #     result = json.dumps(cursor.fetchall(), ensure_ascii=False)
     # else:
     #     result = "不存在该用户/该用户没有训练日志"
-    result = userDs.getUserEntryList(id)
+    result = json.dumps(userDs.getUserEntryList(id), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)

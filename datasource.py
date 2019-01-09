@@ -7,8 +7,10 @@ import requests
 import threading
 import json
 
+
 class Train:
     pass
+
 
 class UserDatasource(object):
     # 必须指定self.cursorclass，否则查询的返回结果不包含字段
@@ -59,7 +61,7 @@ class UserDatasource(object):
     insert_train_sql = '''INSERT ignore  INTO KEEP_TRAIN (item_id,author_id,author_name,content,tags,latitude,longitude,images,created,photo)
                      VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
 
-    def getUserEntries(self,userId, lastId):
+    def getUserEntries(self, userId, lastId):
         r = requests.get(
             "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry&lastId=" + lastId)
         content = r.content.decode('utf-8')
@@ -106,11 +108,62 @@ class UserDatasource(object):
                 self.insert_train(train)
 
             newLastId = js['data']['lastId']
-            threading.Timer(20, function=self.getUserEntries, args=[userId, newLastId]).start()
+            threading.Timer(10, function=self.getUserEntries, args=[userId, newLastId]).start()
         else:
             print(userId + "的列表已爬取完毕")
 
-    def insert_train(self,train):
+    def getUserEntryList(self, userId, lastId):
+        r = requests.get(
+            "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry&lastId=" + lastId)
+        content = r.content.decode('utf-8')
+        js = json.loads(content)
+        result = []
+        data = js["data"]
+        if data.get('info'):
+            items = data['info']
+            for item in items:
+                train = Train()
+                train.id = item["_id"]
+                train.author_id = item['author']["_id"]
+                train.author_name = item['author']["username"]
+                train.content = item["content"]
+                tags = item['hashTags']
+                tags_str = ""
+                if len(tags) > 0:
+                    for tag in tags:
+                        tags_str = tags_str + tag + ","
+                train.tags = tags_str
+
+                geo = item['geo']
+                if len(geo) > 0:
+                    train.latitude = geo[0]
+                    train.longitude = geo[1]
+                train.longitude = ''
+                train.latitude = ''
+                if len(geo) == 2:
+                    train.longitude = geo[0]
+                    train.latitude = geo[1]
+                imgs_str = ''
+                try:
+                    images = item['images']
+                    if len(images) > 0:
+                        for img in images:
+                            imgs_str = img + "," + imgs_str
+
+                    train.photo = item['photo']
+                except Exception as e:
+                    pass
+                train.created = item['created']
+
+                train.images = imgs_str
+
+                self.insert_train(train)
+                result.append(train)
+        else:
+            print(userId + "的列表已爬取完毕")
+        return result
+
+    def insert_train(self, train):
         try:
             self.db.ping(reconnect=True)
 
@@ -128,7 +181,7 @@ class UserDatasource(object):
             # print(e)
             pass
 
-    def insert_user(self,keepuser):
+    def insert_user(self, keepuser):
         try:
             self.db.ping(reconnect=True)
             userid = keepuser.get('_id')
@@ -182,6 +235,7 @@ class UserDatasource(object):
         except Exception as e:
             print(e)
         # getUserEntries(keepuser.get('_id'),"")
+
     def count_user_duration2(self):
         self.cursor.execute(self.count_user_duration_sql)
         result = self.cursor.fetchall()
@@ -201,7 +255,7 @@ class UserDatasource(object):
             du.append(duration)
             if duration < 30 * 24 * 60:
                 map[tag_one_months] = map[tag_one_months] + count
-            elif  duration <= 30 * 24 * 60 * 3:
+            elif duration <= 30 * 24 * 60 * 3:
                 map[tag_three_months] = map[tag_three_months] + count
             elif duration <= 30 * 24 * 60 * 6:
                 map[tag_half_year] = map[tag_half_year] + count
@@ -211,7 +265,7 @@ class UserDatasource(object):
                 map[tag_one_and_half_year] = map[tag_one_and_half_year] + count
             elif duration <= 30 * 24 * 60 * 24:
                 map[tag_two_years] = map[tag_two_years] + count
-            elif duration>24 * 30 * 24 * 60:
+            elif duration > 24 * 30 * 24 * 60:
                 map[tag_over_two_years] = map[tag_over_two_years] + count
 
         print('max = %s' % (numpy.max(du)))
@@ -230,7 +284,7 @@ class UserDatasource(object):
         tag_two_years = '两年'
         tag_over_two_years = '两年以上'
         map = {tag_one_hour: 0, tag_24_hours: 0, tag_three_days: 0, tag_one_week: 0, tag_one_month: 0,
-               tag_three_months: 0, tag_one_years: 0,tag_two_years:0,tag_over_two_years:0}
+               tag_three_months: 0, tag_one_years: 0, tag_two_years: 0, tag_over_two_years: 0}
         du = []
         for item in result:
             duration = int(item['duration'])

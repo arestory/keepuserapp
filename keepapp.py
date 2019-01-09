@@ -57,10 +57,6 @@ insert_user_sql = '''INSERT ignore INTO keep_user_info (userid,name,birthday,cou
                 VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
 
 
-
-
-
-
 @app.route('/nearby_trains')
 def get_nearby_trains():
     db.ping(reconnect=True)
@@ -398,17 +394,18 @@ def get_user_list(page, count):
         return "%s(%s)" % (jsonp, result)
     return makeResponse(result)
 
+
 @app.route('/usertrains/<id>', methods=['GET'])
 def get_user_train_list(id):
-    db.ping(reconnect=True)
-    sql = query_user_train_list_sql % id
-    row = cursor.execute(sql)
-    db.commit()
-    if row > 0:
-        result = json.dumps(cursor.fetchall(), ensure_ascii=False)
-    else:
-        result = "不存在该用户/该用户没有训练日志"
-        userDs.getUserEntries(userId=id)
+    # db.ping(reconnect=True)
+    # sql = query_user_train_list_sql % id
+    # row = cursor.execute(sql)
+    # db.commit()
+    # if row > 0:
+    #     result = json.dumps(cursor.fetchall(), ensure_ascii=False)
+    # else:
+    #     result = "不存在该用户/该用户没有训练日志"
+    result = userDs.getUserEntryList(userId=id)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)

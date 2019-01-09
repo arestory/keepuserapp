@@ -11,7 +11,6 @@ from flask import make_response
 
 from pyecharts import Map, Pie, Bar, Line, Geo
 from datasource import UserDatasource
-import KeepUserHome as userHome
 
 app = Flask(__name__, static_url_path='')
 # 必须指定cursorclass，否则查询的返回结果不包含字段
@@ -409,7 +408,7 @@ def get_user_train_list(id):
         result = json.dumps(cursor.fetchall(), ensure_ascii=False)
     else:
         result = "不存在该用户/该用户没有训练日志"
-        userHome.getUserEntries(userId=id)
+        userDs.getUserEntries(userId=id)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)

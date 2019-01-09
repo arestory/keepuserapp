@@ -3,7 +3,12 @@ import pymysql.cursors
 
 import time, datetime
 import numpy
+import requests
+import threading
+import json
 
+class Train:
+    pass
 
 class UserDatasource(object):
     # 必须指定self.cursorclass，否则查询的返回结果不包含字段
@@ -50,6 +55,78 @@ class UserDatasource(object):
 
     select birthday,country,city,joinTime,nationCode,citycode,province from KEEP_USER_INFO where userid ='%s' limit 1
     '''
+
+    insert_train_sql = '''INSERT ignore  INTO KEEP_TRAIN (item_id,author_id,author_name,content,tags,latitude,longitude,images,created,photo)
+                     VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')'''
+
+    def getUserEntries(self,userId, lastId):
+        r = requests.get(
+            "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry&lastId=" + lastId)
+        content = r.content.decode('utf-8')
+        js = json.loads(content)
+        data = js["data"]
+        if data.get('info'):
+            items = data['info']
+            for item in items:
+                train = Train()
+                train.id = item["_id"]
+                train.author_id = item['author']["_id"]
+                train.author_name = item['author']["username"]
+                train.content = item["content"]
+                tags = item['hashTags']
+                tags_str = ""
+                if len(tags) > 0:
+                    for tag in tags:
+                        tags_str = tags_str + tag + ","
+                train.tags = tags_str
+
+                geo = item['geo']
+                if len(geo) > 0:
+                    train.latitude = geo[0]
+                    train.longitude = geo[1]
+                train.longitude = ''
+                train.latitude = ''
+                if len(geo) == 2:
+                    train.longitude = geo[0]
+                    train.latitude = geo[1]
+                imgs_str = ''
+                try:
+                    images = item['images']
+                    if len(images) > 0:
+                        for img in images:
+                            imgs_str = img + "," + imgs_str
+
+                    train.photo = item['photo']
+                except Exception as e:
+                    pass
+                train.created = item['created']
+
+                train.images = imgs_str
+
+                self.insert_train(train)
+
+            newLastId = js['data']['lastId']
+            threading.Timer(20, function=self.getUserEntries, args=[userId, newLastId]).start()
+        else:
+            print(userId + "的列表已爬取完毕")
+
+    def insert_train(self,train):
+        try:
+            self.db.ping(reconnect=True)
+
+            data = (
+                train.id, train.author_id, train.author_name, train.content.replace("'", "—"), train.tags,
+                train.latitude,
+                train.longitude,
+                train.images, train.created, train.photo)
+            result = self.cursor.execute(self.insert_train_sql % data)
+            if result > 0:
+                print("insert_train插入结果：", result)
+
+            self.db.commit()
+        except Exception as e:
+            # print(e)
+            pass
 
     def insert_user(self,keepuser):
         try:

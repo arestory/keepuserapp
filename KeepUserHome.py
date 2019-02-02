@@ -17,21 +17,20 @@ db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4',
 cursor = db.cursor()
 
 update_user_info_sql = 'UPDATE keep_user_info SET birthday = "%s",country ="%s",city="%s",joinTime="%s",nationCode="%s",citycode="%s",province="%s" WHERE userid = "%s"'
-query_userid__None_birthday_list_sql = 'select userid from keep_user_info where birthday ="None" or length(birthday)=0 limit "%s","%s"'
+query_userid__None_birthday_list_sql = 'select userid from keep_user_info where birthday ="None" or length(birthday)=0 limit %s,%s'
 
 query_birthday = '''
 
-select t.bd,count(*) from (select left(birthday,4) as bd from keep_user where birthday not like '1900%' and birthday not like '201%'  and birthday != 'None') as t group by t.bd;
+select t.bd,count(*) from (select left(birthday,4) as bd from keep_user_info where birthday not like '1900%' and birthday not like '201%'  and birthday != 'None') as t group by t.bd;
 '''
-
 
 class Train:
     pass
 
 
 def rigthBirthday():
-    sql = 'select birthday ,userid  from keep_user where length(birthday)>0'
-    updateSql = 'UPDATE keep_user SET birthday = "%s" where userid ="%s"'
+    sql = 'select birthday ,userid  from keep_user_info where length(birthday)>0'
+    updateSql = 'UPDATE keep_user_info SET birthday = "%s" where userid ="%s"'
     cursor.execute(sql)
     results = cursor.fetchall()
     try:
@@ -85,7 +84,7 @@ def updateUser(start,end):
         pass
     updateUser(end+1,end+100)
 
-# updateUser(0,100)
+updateUser(0,100)
 
 
 # for userid in up-map-div
@@ -183,4 +182,4 @@ def query(start, end):
         index = index + 1
     query(end + 1, end + 1000)
 
-query(1, 1000)
+# query(1, 1000)

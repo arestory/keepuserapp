@@ -14,7 +14,7 @@ class Train:
 
 class UserDatasource(object):
     # 必须指定self.cursorclass，否则查询的返回结果不包含字段
-    db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,
+    db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,
                          cursorclass=pymysql.cursors.DictCursor)
 
     cursor = db.cursor()
@@ -114,7 +114,7 @@ class UserDatasource(object):
 
     def getUserEntryList(self, userId, lastId=""):
         url = "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry"
-        if len(lastId)>0:
+        if len(lastId) > 0:
             url = "https://api.gotokeep.com/social/v5/people/listmodule?userId=" + userId + "&module=entry&lastId=" + lastId
 
         r = requests.get(
@@ -152,8 +152,8 @@ class UserDatasource(object):
                     train['longitude'] = geo[0]
                     train['latitude'] = geo[1]
                 imgs_str = ''
-                trainItem.latitude=train['latitude']
-                trainItem.longitude=train['longitude']
+                trainItem.latitude = train['latitude']
+                trainItem.longitude = train['longitude']
                 try:
                     images = item['images']
                     if len(images) > 0:
@@ -161,13 +161,13 @@ class UserDatasource(object):
                             imgs_str = img + "," + imgs_str
 
                     train['photo'] = item['photo']
-                    trainItem.photo =  item['photo']
+                    trainItem.photo = item['photo']
                 except Exception as e:
                     pass
                 train['created'] = item['created']
-                trainItem.created=item['created']
+                trainItem.created = item['created']
                 train['images'] = imgs_str
-                trainItem.images=imgs_str
+                trainItem.images = imgs_str
                 self.insert_train(trainItem)
                 result.append(train)
         else:

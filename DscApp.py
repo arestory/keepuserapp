@@ -42,7 +42,8 @@ def insert(user):
             user['height'],
             user['weight'], user['characters'], user['station'], user['company'], user['hobby'], user['referee_id'],
             user['referee_name'])
-        cursor.execute(sql)
+        result = cursor.execute(sql)
+        print("插入一个新用户：%s %s" % (user['name'],result))
         db.commit()
 
     except Exception as e:
@@ -58,7 +59,6 @@ def get_user_info(id):
     content = r.content.decode('utf-8')
     js = json.loads(content)
     data = js["data"]
-    print(data)
     insert(data)
 
 

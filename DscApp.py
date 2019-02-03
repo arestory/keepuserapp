@@ -29,9 +29,6 @@ app_version = "3.5.0"
 get_user_info_url = 'https://dscapp.dscun.com/api/user/%s'
 get_user_list_url = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/10'
 
-cursor.execute("select * from user")
-data = cursor.fetchall()
-print(data)
 
 def insert(user):
     try:
@@ -89,4 +86,4 @@ def get_user_page(feedid):
     pass
 
 
-# get_user_page("0")
+get_user_page("0")

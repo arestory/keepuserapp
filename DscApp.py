@@ -73,7 +73,6 @@ def get_user_page(feedid):
     data = js["data"]
     last_feed_id = data['rem_feeds']
     last_feed_id = last_feed_id[len(last_feed_id) - 1]
-    print(data)
     feeds = data['feeds']
     for item in feeds:
         user_id = item['user_id']

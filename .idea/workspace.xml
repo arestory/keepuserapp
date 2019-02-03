@@ -21,7 +21,7 @@
     <SUITE FILE_PATH="coverage/flask$Matplot.coverage" NAME="Matplot Coverage Results" MODIFIED="1544756395082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$wanandroidapi.coverage" NAME="wanandroidapi Coverage Results" MODIFIED="1543828044806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$Charts.coverage" NAME="Charts Coverage Results" MODIFIED="1544769392118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flask$DscApp.coverage" NAME="DscApp Coverage Results" MODIFIED="1549209400933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask$DscApp.coverage" NAME="DscApp Coverage Results" MODIFIED="1549210706521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1081512522">
@@ -107,8 +107,8 @@
       <file leaf-file-name="DscApp.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DscApp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="103" column="35" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="35" />
+            <state relative-caret-position="342">
+              <caret line="33" column="75" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="75" />
               <folding>
                 <element signature="e#1#16#0" expanded="true" />
               </folding>
@@ -116,11 +116,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/lib/python3.7/site-packages/requests/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="513" selection-start-line="513" selection-end-line="513" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="response.py" pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/lib/python3.7/site-packages/urllib3/response.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2378">
-              <caret line="198" column="45" selection-start-line="198" selection-start-column="37" selection-end-line="198" selection-end-column="45" />
+            <state relative-caret-position="160">
+              <caret line="199" selection-start-line="199" selection-end-line="199" />
             </state>
           </provider>
         </entry>
@@ -128,8 +137,8 @@
       <file leaf-file-name="parse.py" pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/parse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="430" column="28" selection-start-line="430" selection-start-column="27" selection-end-line="430" selection-end-column="28" />
+            <state relative-caret-position="160">
+              <caret line="431" selection-start-line="431" selection-end-line="431" />
             </state>
           </provider>
         </entry>
@@ -141,18 +150,6 @@
               <caret line="7" column="11" lean-forward="true" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
               <folding>
                 <element signature="e#15#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Matplot.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Matplot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-440">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -567,7 +564,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3825641" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42857143" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.46611053" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.31699687" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1984127" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -575,7 +572,7 @@
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.8730469" weight="0.26824033" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.4181439" />
+      <window_info active="true" anchor="bottom" id="Debug" order="5" visible="true" weight="0.4296142" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -682,7 +679,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/pymysql/cursors.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/__init__.py" />
     <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.2/python_stubs/-1199943126/builtins.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/flask/helpers.py" />
@@ -902,13 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/parse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="430" column="28" selection-start-line="430" selection-start-column="27" selection-end-line="430" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.7/site-packages/requests/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -923,10 +912,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/requests/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="513" selection-start-line="513" selection-end-line="513" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file:///usr/local/lib/python3.7/site-packages/urllib3/response.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2378">
-          <caret line="198" column="45" selection-start-line="198" selection-start-column="37" selection-end-line="198" selection-end-column="45" />
+        <state relative-caret-position="160">
+          <caret line="199" selection-start-line="199" selection-end-line="199" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="431" selection-start-line="431" selection-end-line="431" />
         </state>
       </provider>
     </entry>
@@ -942,8 +945,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DscApp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="103" column="35" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="35" />
+        <state relative-caret-position="342">
+          <caret line="33" column="75" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="75" />
           <folding>
             <element signature="e#1#16#0" expanded="true" />
           </folding>

@@ -1,7 +1,6 @@
 import requests
 import json
 import threading
-
 import pymysql.cursors
 
 db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
@@ -24,7 +23,7 @@ star_sign,ideal_mate,hometown,height,weight,characters ,station,company,hobby,re
 
 # cursor.execute(create_table_sql)
 class Header:
-    token = "62fa73e1a64ca656e4833cadf28c7c95"
+    token = "fd01d58be96c07a346e477adadad4716"
     app_version = "3.5.0"
     pass
 
@@ -32,15 +31,14 @@ class Header:
 app_version = "3.5.0"
 
 get_user_info_url = 'https://dscapp.dscun.com/api/user/%s'
-get_user_list_url = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/50'
-get_user_list_url2 = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/-50'
+get_user_list_url = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/20'
+get_user_list_url2 = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/-20'
 
 header = Header()
 
 
 def insert(user):
     try:
-
         db.ping(reconnect=True)
         sql = insert_user_sql % (
             user['id'], user['name'], user['os_type'], user['birthday'], user['city'], user['sex'], user['birthpet'],
@@ -94,7 +92,7 @@ def get_user_info(id):
             insert(data)
         else:
             print("不需要男生数据")
-    except:
+    except Exception as e:
         pass
 
 
@@ -137,7 +135,7 @@ def get_user_page(feedid):
                 timer = threading.Timer(5, function=get_user_page, args={last_feed_id})
                 timer.start()
         pass
-    except:
+    except  Exception as e:
         pass
 
 

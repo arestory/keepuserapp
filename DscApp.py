@@ -34,7 +34,7 @@ def insert(user):
     try:
 
         db.ping(reconnect=True)
-
+        print("%s , %s,%s %s(cm),%s(kg)" % (user['name'],user['birthday'],user['city'],user['height'],user['weight']))
         sql = insert_user_sql % (
             user['id'], user['name'], user['os_type'], user['birthday'], user['city'], user['sex'], user['birthpet'],
             user['avatar'], user['education'], user['university'], user['star_sign'], user['ideal_mate'],
@@ -42,9 +42,9 @@ def insert(user):
             user['height'],
             user['weight'], user['characters'], user['station'], user['company'], user['hobby'], user['referee_id'],
             user['referee_name'])
-        result = cursor.execute(sql)
-        print("插入一个新用户：%s %s" % (user['name'],result))
+        cursor.execute(sql)
         db.commit()
+        threading.Timer(3, function=get_user_info, args={user['referee_id']}).start()
 
     except Exception as e:
         pass
@@ -52,14 +52,15 @@ def insert(user):
 
 def get_user_info(id):
     url = get_user_info_url % id
-    print("开始爬取用户信息 %s" % url)
+    # print("开始爬取用户信息 %s" % url)
     headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 8.1.0; SM-N9600 Build/M1AJQ)', 'os-type': "Android",
                'app-version': app_version, 'meet-token': token}
     r = requests.get(url=url, params=(), headers=headers)
     content = r.content.decode('utf-8')
     js = json.loads(content)
     data = js["data"]
-    insert(data)
+    if data['sex'] == 'female':
+        insert(data)
 
 
 def get_user_page(feedid):

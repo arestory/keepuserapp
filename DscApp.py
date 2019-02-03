@@ -21,20 +21,27 @@ insert_user_sql = '''insert ignore INTO user (id,name,os_type,birthday,city,sex,
 star_sign,ideal_mate,hometown,height,weight,characters ,station,company,hobby,referee_id,referee_name)   VALUES (
 '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s') '''
 
-# cursor.execute(create_table_sql)
 
-token = "6f0d547bbae230068d98e778f24f3126"
+# cursor.execute(create_table_sql)
+class Header:
+    token = "62fa73e1a64ca656e4833cadf28c7c95"
+    app_version = "3.5.0"
+    pass
+
+
 app_version = "3.5.0"
 
 get_user_info_url = 'https://dscapp.dscun.com/api/user/%s'
-get_user_list_url = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/10'
+get_user_list_url = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/50'
+get_user_list_url2 = 'https://dscapp.dscun.com/api/feeds/feeds_id/%s/count/-50'
+
+header = Header()
 
 
 def insert(user):
     try:
 
         db.ping(reconnect=True)
-        print("%s , %s,%s %s(cm),%s(kg)" % (user['name'],user['birthday'],user['city'],user['height'],user['weight']))
         sql = insert_user_sql % (
             user['id'], user['name'], user['os_type'], user['birthday'], user['city'], user['sex'], user['birthpet'],
             user['avatar'], user['education'], user['university'], user['star_sign'], user['ideal_mate'],
@@ -42,48 +49,96 @@ def insert(user):
             user['height'],
             user['weight'], user['characters'], user['station'], user['company'], user['hobby'], user['referee_id'],
             user['referee_name'])
-        cursor.execute(sql)
+        result = cursor.execute(sql)
+        if result > 0:
+            print(
+                "%s , %s,%s %s(cm),%s(kg)" % (user['name'], user['birthday'], user['city'], user['height'], user['weight']))
         db.commit()
-        threading.Timer(3, function=get_user_info, args={user['referee_id']}).start()
+        global timer
+        timer = threading.Timer(3, function=get_user_info, args={user['referee_id']})
+        timer.start()
 
     except Exception as e:
         pass
 
 
-def get_user_info(id):
-    url = get_user_info_url % id
-    # print("开始爬取用户信息 %s" % url)
-    headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 8.1.0; SM-N9600 Build/M1AJQ)', 'os-type': "Android",
-               'app-version': app_version, 'meet-token': token}
-    r = requests.get(url=url, params=(), headers=headers)
+def login(feedid):
+    params = {"tel": "15920419761",
+              "password": "yuwenque"}
+    headers = {'app-version': app_version}
+    r = requests.post('https://dscapp.dscun.com/api/session', json=params, headers=headers)
     content = r.content.decode('utf-8')
     js = json.loads(content)
-    data = js["data"]
-    if data['sex'] == 'female':
-        insert(data)
+
+    print("登录结果: %s" % js['msg'])
+    data = js['data']
+    print(data)
+    tk = data['token']
+    print("新token = %s" % tk)
+    header.token = tk
+    get_user_page(feedid)
+    pass
+
+
+def get_user_info(id):
+    try:
+        url = get_user_info_url % id
+        # print("开始爬取用户信息 %s" % url)
+        headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 8.1.0; SM-N9600 Build/M1AJQ)', 'os-type': "Android",
+                   'app-version': app_version, 'meet-token': header.token}
+        r = requests.get(url=url, params=(), headers=headers)
+        content = r.content.decode('utf-8')
+        js = json.loads(content)
+        data = js["data"]
+        if data['sex'] == 'female':
+            insert(data)
+        else:
+            print("不需要男生数据")
+    except:
+        pass
 
 
 def get_user_page(feedid):
-    url = get_user_list_url % feedid
-    print("开始爬取%s" % feedid)
-    headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 8.1.0; SM-N9600 Build/M1AJQ)', 'os-type': "Android",
-               'app-version': app_version, 'meet-token': token}
-    r = requests.get(url=url, params=(), headers=headers)
-    content = r.content.decode('utf-8')
-    js = json.loads(content)
-    data = js["data"]
-    last_feed_id = data['rem_feeds']
-    last_feed_id = last_feed_id[len(last_feed_id) - 1]
-    feeds = data['feeds']
-    for item in feeds:
-        user_id = item['user_id']
-        sex =item['sex']
-        if sex == "female":
-            threading.Timer(3, function=get_user_info, args={user_id}).start()
-
+    try:
+        if feedid == '0':
+            url = get_user_list_url % feedid
+        else:
+            url = get_user_list_url2 % feedid
+        print("开始爬取%s" % feedid)
+        headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 8.1.0; SM-N9600 Build/M1AJQ)', 'os-type': "Android",
+                   'app-version': app_version, 'meet-token': header.token}
+        r = requests.get(url=url, params=(), headers=headers)
+        content = r.content.decode('utf-8')
+        js = json.loads(content)
+        code = js['code']
+        if code == 10003:
+            print("登录失败，重新登录重")
+            login(feedid)
+            pass
+        else:
+            data = js["data"]
+            if len(data) > 0:
+                feeds = data['feeds']
+                last_feed_id = feeds[len(feeds) - 1]['feeds_id']
+                for item in feeds:
+                    user_id = item['user_id']
+                    sex = item['sex']
+                    if sex == "female":
+                        global timer
+                        timer = threading.Timer(3, function=get_user_info, args={user_id})
+                        timer.start()
+                    comment = item['comment']
+                    if len(comment) > 0:
+                        for c in comment:
+                            if c['sex'] == 'female':
+                                userId = c['user_id']
+                                timer = threading.Timer(3, function=get_user_info, args={userId})
+                                timer.start()
+                timer = threading.Timer(5, function=get_user_page, args={last_feed_id})
+                timer.start()
         pass
-    threading.Timer(5, function=get_user_page, args={last_feed_id}).start()
-    pass
+    except:
+        pass
 
 
 get_user_page("0")

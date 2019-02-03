@@ -90,8 +90,6 @@ def get_user_info(id):
         data = js["data"]
         if data['sex'] == 'female':
             insert(data)
-        else:
-            print("不需要男生数据")
     except Exception as e:
         pass
 
@@ -110,7 +108,7 @@ def get_user_page(feedid):
         js = json.loads(content)
         code = js['code']
         if code == 10003:
-            print("登录失败，重新登录重")
+            print("登录失败，重新登录")
             login(feedid)
             pass
         else:

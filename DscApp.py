@@ -3,7 +3,7 @@ import json
 import threading
 import pymysql.cursors
 
-db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
+db = pymysql.connect("localhost", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
                      cursorclass=pymysql.cursors.DictCursor)
 cursor = db.cursor()
 

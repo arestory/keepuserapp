@@ -137,8 +137,8 @@
       <file leaf-file-name="Dsc.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Dsc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="789">
-              <caret line="139" column="20" selection-start-line="139" selection-start-column="20" selection-end-line="139" selection-end-column="20" />
+            <state relative-caret-position="485">
+              <caret line="139" column="16" selection-start-line="139" selection-start-column="16" selection-end-line="139" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -454,7 +454,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3825641" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3138686" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.31699687" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.31699687" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.2008547" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -874,8 +874,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dsc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="789">
-          <caret line="139" column="20" selection-start-line="139" selection-start-column="20" selection-end-line="139" selection-end-column="20" />
+        <state relative-caret-position="485">
+          <caret line="139" column="16" selection-start-line="139" selection-start-column="16" selection-end-line="139" selection-end-column="16" />
         </state>
       </provider>
     </entry>

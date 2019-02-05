@@ -16,8 +16,8 @@ ds = DscDatasource()
 @app.route("/get_user_list")
 def query_user_list():
     start = request.args.get("start")
-    end = request.args.get("end")
-    result = json.dumps(ds.get_user_list(start, end), ensure_ascii=False)
+    count = request.args.get("count")
+    result = json.dumps(ds.get_user_list(start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -27,9 +27,9 @@ def query_user_list():
 @app.route('/get_user_list_from_company')
 def get_user_list_from_company():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     keyword = request.args.get("keyword")
-    result = json.dumps(ds.get_user_list_from_company(keyword, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_from_company(keyword, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -39,9 +39,9 @@ def get_user_list_from_company():
 @app.route('/get_user_list_between_birthday')
 def get_user_list_between_birthday():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     year = request.args.get("year")
-    result = json.dumps(ds.get_user_list_between_birthday(year, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_between_birthday(year, start, count), ensure_ascii=False)
     print(len(result))
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
@@ -52,10 +52,10 @@ def get_user_list_between_birthday():
 @app.route('/get_user_list_between_height')
 def get_user_list_between_height():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     heightMin = request.args.get("heightMin")
     heightMax = request.args.get("heightMax")
-    result = json.dumps(ds.get_user_list_between_height(heightMin, heightMax, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_between_height(heightMin, heightMax, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -65,10 +65,10 @@ def get_user_list_between_height():
 # @app.route('/get_user_list_between_height')
 # def get_user_list_between_height():
 #     start = request.args.get("start")
-#     end = request.args.get("end")
+#     count = request.args.get("count")
 #     heightMin = request.args.get("heightMin")
 #     heightMax = request.args.get("heightMax")
-#     result = json.dumps(ds.get_user_list_between_height(heightMin, heightMax, start, end), ensure_ascii=False)
+#     result = json.dumps(ds.get_user_list_between_height(heightMin, heightMax, start, count), ensure_ascii=False)
 #     jsonp = request.args.get("jsonpCallback")
 #     if jsonp:
 #         return "%s(%s)" % (jsonp, result)
@@ -78,10 +78,10 @@ def get_user_list_between_height():
 @app.route('/get_user_list_between_weight')
 def get_user_list_between_weight():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     weightMin = request.args.get("weightMin")
     weightMax = request.args.get("weightMax")
-    result = json.dumps(ds.get_user_list_between_weight(weightMin, weightMax, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_between_weight(weightMin, weightMax, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -91,9 +91,9 @@ def get_user_list_between_weight():
 @app.route('/get_user_list_target_height')
 def get_user_list_target_height():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     heightMin = request.args.get("heightMin")
-    result = json.dumps(ds.get_user_list_target_height(heightMin, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_target_height(heightMin, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -103,9 +103,9 @@ def get_user_list_target_height():
 @app.route('/get_user_list_star_sign')
 def get_user_list_star_sign():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     star_sign = request.args.get("star_sign")
-    result = json.dumps(ds.get_user_list_star_sign(star_sign, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_star_sign(star_sign, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -115,9 +115,9 @@ def get_user_list_star_sign():
 @app.route('/get_user_list_with_education')
 def get_user_list_with_education():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     education = request.args.get("education")
-    result = json.dumps(ds.get_user_list_with_education(education, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_education(education, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -127,9 +127,9 @@ def get_user_list_with_education():
 @app.route('/get_user_list_with_university')
 def get_user_list_with_university():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     university = request.args.get("university")
-    result = json.dumps(ds.get_user_list_with_university(university, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_university(university, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -139,9 +139,9 @@ def get_user_list_with_university():
 @app.route('/get_user_list_with_area')
 def get_user_list_with_area():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     area = request.args.get("area")
-    result = json.dumps(ds.get_user_list_with_area(area, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_area(area, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -150,10 +150,10 @@ def get_user_list_with_area():
 @app.route('/get_user_list_with_area_and_birth')
 def get_user_list_with_area_and_birth():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     area = request.args.get("area")
     birth = request.args.get("birth")
-    result = json.dumps(ds.get_user_list_with_area_and_birth(area,birth, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_area_and_birth(area,birth, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -162,9 +162,9 @@ def get_user_list_with_area_and_birth():
 @app.route('/get_user_list_with_hobby')
 def get_user_list_with_hobby():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     hobby = request.args.get("hobby")
-    result = json.dumps(ds.get_user_list_with_hobby(hobby, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_hobby(hobby, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -173,10 +173,10 @@ def get_user_list_with_hobby():
 @app.route('/get_user_list_with_company_and_birth')
 def get_user_list_with_company_and_birth():
     start = request.args.get("start")
-    end = request.args.get("end")
+    count = request.args.get("count")
     company = request.args.get("company")
     birthday = request.args.get("birthday")
-    result = json.dumps(ds.get_user_list_with_company_and_birth(company,birthday, start, end), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_company_and_birth(company,birthday, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)

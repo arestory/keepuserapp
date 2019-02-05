@@ -207,7 +207,7 @@ class DscDatasource(object):
 
 
 #
-ds = DscDatasource()
-
-query_result = ds.get_user_list_with_area_and_birth('湛江','199',1,1000)
-print(len(query_result))
+# ds = DscDatasource()
+#
+# query_result = ds.get_user_list_with_area_and_birth('湛江','199',1,1000)
+# print(len(query_result))

@@ -13,13 +13,52 @@ app = Flask(__name__, static_url_path='')
 ds = DscDatasource()
 
 
+@app.route('/get_user_gallery')
+def get_user_gallery():
+    token = request.args.get('token')
+    userId = request.args.get('userId')
+    headers = {'app-version': '3.5.0', 'Content-Type': "application/json", 'meet-token': token}
+    lastId = request.args.get('lastId')
+    if lastId == '0':
+        url = 'https://dscapp.dscun.com/api/feeds/user/%s/feeds_id/0/count/10' % userId
+    else:
+        url = 'https://dscapp.dscun.com/api/feeds/user/%s/feeds_id/%s/count/-10' % (userId, lastId)
+    r = requests.get(url, headers=headers)
+    content = r.content.decode('utf-8')
+    js = json.loads(content)
+
+    result = {'code': js['code'], 'msg': js['msg']}
+    jsonp = request.args.get("jsonpCallback")
+
+    if js['code']==10003:
+        if jsonp:
+            return "%s(%s)" % (jsonp, result)
+        return make_response(result)
+    data = js['data']
+    result['data'] = []
+    if len(data)!=3:
+        if len(data['feeds']) > 0:
+            items = []
+            for item in data['feeds']:
+                map = {'feeds_id': item['feeds_id'], 'feeds_data': item['feeds_data'], 'height': item['height'],
+                       'width': item['width'], 'image': item['image'], 'insert_date': item['insert_date']}
+                items.append(map)
+                pass
+            result['data'] = items
+
+
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
+    return make_response(result)
+
+
 @app.route('/login')
 def login():
     name = request.args.get('name')
     pwd = request.args.get('password')
     params = {"tel": name,
               "password": pwd}
-    headers = {'app-version': '3.5.0'}
+    headers = {'app-version': '3.5.0', 'Content-Type': "application/json"}
     r = requests.post('https://dscapp.dscun.com/api/session', json=params, headers=headers)
     content = r.content.decode('utf-8')
     js = json.loads(content)
@@ -37,7 +76,6 @@ def get_user_info():
     if jsonp:
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
-
 
 
 @app.route("/get_user_list")
@@ -174,17 +212,19 @@ def get_user_list_with_area():
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
+
 @app.route('/get_user_list_with_area_and_birth')
 def get_user_list_with_area_and_birth():
     start = request.args.get("start")
     count = request.args.get("count")
     area = request.args.get("area")
     birth = request.args.get("birth")
-    result = json.dumps(ds.get_user_list_with_area_and_birth(area,birth, start, count), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_area_and_birth(area, birth, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
+
 
 @app.route('/get_user_list_with_hobby')
 def get_user_list_with_hobby():
@@ -197,13 +237,14 @@ def get_user_list_with_hobby():
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
+
 @app.route('/get_user_list_with_company_and_birth')
 def get_user_list_with_company_and_birth():
     start = request.args.get("start")
     count = request.args.get("count")
     company = request.args.get("company")
     birthday = request.args.get("birthday")
-    result = json.dumps(ds.get_user_list_with_company_and_birth(company,birthday, start, count), ensure_ascii=False)
+    result = json.dumps(ds.get_user_list_with_company_and_birth(company, birthday, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)

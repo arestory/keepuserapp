@@ -14,7 +14,7 @@ class Train:
 
 class UserDatasource(object):
     # 必须指定self.cursorclass，否则查询的返回结果不包含字段
-    db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,
+    db = pymysql.connect("localhost", 'root', 'yuwenque', 'keep', charset='utf8mb4', port=3306,
                          cursorclass=pymysql.cursors.DictCursor)
 
     cursor = db.cursor()

@@ -13,6 +13,33 @@ app = Flask(__name__, static_url_path='')
 ds = DscDatasource()
 
 
+@app.route('/login')
+def login():
+    name = request.args.get('name')
+    pwd = request.args.get('password')
+    params = {"tel": name,
+              "password": pwd}
+    headers = {'app-version': '3.5.0'}
+    r = requests.post('https://dscapp.dscun.com/api/session', json=params, headers=headers)
+    content = r.content.decode('utf-8')
+    js = json.loads(content)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, js)
+    return make_response(js)
+
+
+@app.route('/get_user_info')
+def get_user_info():
+    userId = request.args.get('id')
+    result = json.dumps(ds.get_user_info(userId), ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
+    return make_response(result)
+
+
+
 @app.route("/get_user_list")
 def query_user_list():
     start = request.args.get("start")

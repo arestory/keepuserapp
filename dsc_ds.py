@@ -9,7 +9,7 @@ import json
 
 
 class DscDatasource(object):
-    db = pymysql.connect("localhost", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
+    db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
                          cursorclass=pymysql.cursors.DictCursor)
     cursor = db.cursor()
 
@@ -31,6 +31,15 @@ class DscDatasource(object):
 
     def pingDb(self):
         self.db.ping(reconnect=True)
+
+
+
+    # 获取用户详情
+    def get_user_info(self, userId):
+        query_user_info ='''select * from user where id = "%s" ''' % userId
+        self.cursor.execute(query_user_info)
+        return self.cursor.fetchone()
+
 
     # 获取用户列表
     def get_user_list(self, start, count):

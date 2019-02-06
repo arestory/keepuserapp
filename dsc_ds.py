@@ -67,7 +67,7 @@ class DscDatasource(object):
     def get_user_list_between_birthday(self, year, start, count):
         self.pingDb()
         query_user_list = ''' 
-                     select * from user where birthday like '%s%%' limit %s,%s
+                     select * from user where left(birthday,4)>= %s limit %s,%s
                      ''' % (year, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -182,7 +182,7 @@ class DscDatasource(object):
     def get_user_list_with_area_and_birth(self, area, birth,start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from user where hometown like '%%%s%%' and birthday like '%s%%' limit %s,%s
+                            select * from user where hometown like '%%%s%%' and left(birthday,4)>=%s limit %s,%s
                             ''' % (area,birth, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)

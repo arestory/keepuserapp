@@ -13,10 +13,7 @@ app = Flask(__name__, static_url_path='')
 ds = DscDatasource()
 
 
-@app.route('/get_user_gallery')
-def get_user_gallery():
-    token = request.args.get('token')
-    userId = request.args.get('userId')
+def query_user_gallery(token, userId):
     headers = {'app-version': '3.5.0', 'Content-Type': "application/json", 'meet-token': token}
     lastId = request.args.get('lastId')
     if lastId == '0':
@@ -26,17 +23,11 @@ def get_user_gallery():
     r = requests.get(url, headers=headers)
     content = r.content.decode('utf-8')
     js = json.loads(content)
-
-    result = {'code': js['code'], 'msg': js['msg']}
-    jsonp = request.args.get("jsonpCallback")
-
-    if js['code']==10003:
-        if jsonp:
-            return "%s(%s)" % (jsonp, result)
-        return make_response(result)
     data = js['data']
-    result['data'] = []
-    if len(data)!=3:
+    result = {'code': js['code'], 'msg': js['msg'], 'data': []}
+    if result['code'] == 10003:
+        return result
+    if data != "{}":
         if len(data['feeds']) > 0:
             items = []
             for item in data['feeds']:
@@ -45,23 +36,76 @@ def get_user_gallery():
                 items.append(map)
                 pass
             result['data'] = items
+    return result
 
+
+def interest_some(token, userId):
+    headers = {'app-version': '3.5.0', 'meet-token': token}
+    url = 'https://dscapp.dscun.com/api/user/interest/%s' % userId
+    print(url)
+    r = requests.post(url, headers=headers)
+    content = r.content.decode('utf-8')
+    js = json.loads(content)
+    data = js['data']
+    if js['code'] == 0:
+        result = {'code': js['code'], 'msg': js['msg'], 'data': '关注成功，请打开APP查看'}
+    else:
+        result = {'code': js['code'], 'msg': js['msg'], 'data': '关注失败'}
+
+    return result
+
+
+@app.route('/interest')
+def interest_someone():
+    token = request.args.get('token')
+    userId = request.args.get('userId')
+    result = interest_some(token, userId)
+
+    if result['code'] == 10003:
+        # 重新登录
+        login_result = login_oper('15920419761', 'yuwenque')
+        new_token = login_result['data']['token']
+        result = interest_some(new_token, userId)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
+    return make_response(result)
+
+
+@app.route('/get_user_gallery')
+def get_user_gallery():
+    token = request.args.get('token')
+    userId = request.args.get('userId')
+
+    result = query_user_gallery(token, userId)
+    jsonp = request.args.get("jsonpCallback")
+
+    if result['code'] == 10003:
+        # 重新登录
+        login_result = login_oper('15920419761', 'yuwenque')
+        new_token = login_result['data']['token']
+        result = query_user_gallery(new_token, userId)
 
     if jsonp:
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
 
-@app.route('/login')
-def login():
-    name = request.args.get('name')
-    pwd = request.args.get('password')
+def login_oper(name, password):
     params = {"tel": name,
-              "password": pwd}
+              "password": password}
     headers = {'app-version': '3.5.0', 'Content-Type': "application/json"}
     r = requests.post('https://dscapp.dscun.com/api/session', json=params, headers=headers)
     content = r.content.decode('utf-8')
     js = json.loads(content)
+    return js
+
+
+@app.route('/login')
+def login():
+    name = request.args.get('name')
+    pwd = request.args.get('password')
+    js = login_oper(name, pwd)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, js)

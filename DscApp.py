@@ -24,7 +24,9 @@ def query_user_gallery(token, userId):
     content = r.content.decode('utf-8')
     js = json.loads(content)
     data = js['data']
-    result = {'code': js['code'], 'msg': js['msg'], 'data': []}
+    result = {'code': js['code'], 'msg': js['msg'], 'data': [], 'token': token}
+    if result['code'] == 20101:
+        return result
     if result['code'] == 10003:
         return result
     if data != "{}":
@@ -36,6 +38,7 @@ def query_user_gallery(token, userId):
                 items.append(map)
                 pass
             result['data'] = items
+    result['token'] = token
     return result
 
 
@@ -46,9 +49,8 @@ def interest_some(token, userId):
     r = requests.post(url, headers=headers)
     content = r.content.decode('utf-8')
     js = json.loads(content)
-    data = js['data']
     if js['code'] == 0:
-        result = {'code': js['code'], 'msg': js['msg'], 'data': '关注成功，请打开APP查看'}
+        result = {'code': js['code'], 'msg': js['msg'], 'data': '关注成功，请打开APP查看', 'token': token}
     else:
         result = {'code': js['code'], 'msg': js['msg'], 'data': '关注失败'}
 

@@ -61,9 +61,11 @@ def interest_someone():
     userId = request.args.get('userId')
     result = interest_some(token, userId)
 
+    name = request.args.get('name')
+    password = request.args.get('password')
     if result['code'] == 10003:
         # 重新登录
-        login_result = login_oper('15920419761', 'yuwenque')
+        login_result = login_oper(name, password)
         new_token = login_result['data']['token']
         result = interest_some(new_token, userId)
     jsonp = request.args.get("jsonpCallback")
@@ -76,13 +78,15 @@ def interest_someone():
 def get_user_gallery():
     token = request.args.get('token')
     userId = request.args.get('userId')
+    name = request.args.get('name')
+    password = request.args.get('password')
 
     result = query_user_gallery(token, userId)
     jsonp = request.args.get("jsonpCallback")
 
     if result['code'] == 10003:
         # 重新登录
-        login_result = login_oper('15920419761', 'yuwenque')
+        login_result = login_oper(name, password)
         new_token = login_result['data']['token']
         result = query_user_gallery(new_token, userId)
 

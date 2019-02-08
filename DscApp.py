@@ -269,7 +269,12 @@ def get_user_list_with_area_and_birth():
     count = request.args.get("count")
     area = request.args.get("area")
     birth = request.args.get("birth")
-    result = json.dumps(ds.get_user_list_with_area_and_birth(area, birth, start, count), ensure_ascii=False)
+    if not request.args.__contains__('height'):
+        height = 0
+    else:
+        height = request.args.get("height")
+
+    result = json.dumps(ds.get_user_list_with_area_and_birth(area, birth,height, start, count), ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)

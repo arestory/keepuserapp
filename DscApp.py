@@ -239,6 +239,7 @@ def get_user_list_with_education():
     return make_response(result)
 
 
+
 @app.route('/get_user_list_with_university')
 def get_user_list_with_university():
     start = request.args.get("start")
@@ -280,6 +281,27 @@ def get_user_list_with_area_and_birth():
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
 
+
+
+
+@app.route('/get_user_with_complicate')
+def get_user_with_complicate():
+    start = request.args.get("start")
+    count = request.args.get("count")
+    area = request.args.get("area")
+    birth = request.args.get("birth")
+    name = request.args.get("name")
+    university = request.args.get("university")
+    if not request.args.__contains__('height'):
+        height = 0
+    else:
+        height = request.args.get("height")
+
+    result = json.dumps(ds.get_user_with_complicate(area, birth, height,name,university,start,count), ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
+    return make_response(result)
 
 @app.route('/get_user_list_with_hobby')
 def get_user_list_with_hobby():

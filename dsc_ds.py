@@ -73,7 +73,7 @@ class DscDatasource(object):
 
     # 获取用户详情
     def get_user_info(self, userId):
-        query_user_info = '''select * from user where id = "%s" ''' % userId
+        query_user_info = '''select * from userinfo where id = "%s" ''' % userId
         self.cursor.execute(query_user_info)
         return self.cursor.fetchone()
 
@@ -81,7 +81,7 @@ class DscDatasource(object):
     def get_user_list(self, start, count):
         self.pingDb()
         query_user_list = ''' 
-        select * from user limit %s,%s
+        select * from userinfo limit %s,%s
         ''' % (start, count)
         self.cursor.execute(query_user_list)
         query_result = self.cursor.fetchall()
@@ -107,7 +107,7 @@ class DscDatasource(object):
     def get_user_list_from_company(self, keyword, start, count):
         self.pingDb()
         query_user_list = ''' 
-               select * from user where company like '%%%s%%' limit %s,%s
+               select * from userinfo where company like '%%%s%%' limit %s,%s
                ''' % (keyword, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -119,7 +119,7 @@ class DscDatasource(object):
     def get_user_list_between_birthday(self, year, start, count):
         self.pingDb()
         query_user_list = ''' 
-                     select * from user where left(birthday,4)>= %s limit %s,%s
+                     select * from userinfo where left(birthday,4)>= %s limit %s,%s
                      ''' % (year, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -132,7 +132,7 @@ class DscDatasource(object):
     def get_user_list_with_birthpet(self, pet, start, count):
         self.pingDb()
         query_user_list = ''' 
-                     select * from user where birthpet ='%s' limit %s,%s
+                     select * from userinfo where birthpet ='%s' limit %s,%s
                      ''' % (pet, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -144,7 +144,7 @@ class DscDatasource(object):
     def get_user_list_between_height(self, heightMin, heightMax, start, count):
         self.pingDb()
         query_user_list = ''' 
-                     select * from user where height>=%s and height<=%s limit %s,%s
+                     select * from userinfo where height>=%s and height<=%s limit %s,%s
                      ''' % (heightMin, heightMax, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -156,7 +156,7 @@ class DscDatasource(object):
     def get_user_list_between_weight(self, weightMin, weightMax, start, count):
         self.pingDb()
         query_user_list = ''' 
-                     select * from user where weight>=%s and weight<=%s limit %s,%s
+                     select * from userinfo where weight>=%s and weight<=%s limit %s,%s
                      ''' % (weightMin, weightMax, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -168,7 +168,7 @@ class DscDatasource(object):
     def get_user_list_target_height(self, heightMin, start, count):
         self.pingDb()
         query_user_list = ''' 
-                     select * from user where height>=%s limit %s,%s
+                     select * from userinfo where height>=%s limit %s,%s
                      ''' % (heightMin, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -180,7 +180,7 @@ class DscDatasource(object):
     def get_user_list_star_sign(self, star_sign, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from user where star_sign='%s' limit %s,%s
+                            select * from userinfo where star_sign='%s' limit %s,%s
                             ''' % (star_sign, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -192,7 +192,7 @@ class DscDatasource(object):
     def get_user_list_with_education(self, education, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from user where education='%s' limit %s,%s
+                            select * from userinfo where education='%s' limit %s,%s
                             ''' % (education, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -204,7 +204,7 @@ class DscDatasource(object):
     def get_user_list_with_university(self, university, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from user where university='%s' limit %s,%s
+                            select * from userinfo where university='%s' limit %s,%s
                             ''' % (university, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -212,12 +212,26 @@ class DscDatasource(object):
         print(query_result)
         return query_result
 
+
     # 获取某个地区的用户列表
     def get_user_list_with_area(self, area, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from user where hometown like '%%%s%%' limit %s,%s
+                            select * from userinfo where hometown like '%%%s%%' limit %s,%s
                             ''' % (area, start, count)
+        print(query_user_list)
+        self.cursor.execute(query_user_list)
+        query_result = self.cursor.fetchall()
+        print(query_result)
+        return query_result
+
+
+    # 多重查询
+    def get_user_with_complicate(self,area,birth,height,name,university,start,count):
+        self.pingDb()
+        query_user_list = ''' 
+                                  select * from userinfo where name like '%%%s%%' and university like '%%%s%%' and hometown like '%%%s%%' and left(birthday,4)>=%s and height>%s
+ limit %s,%s                                  ''' % (name,university,area, birth, height,start,count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
         query_result = self.cursor.fetchall()
@@ -228,7 +242,7 @@ class DscDatasource(object):
     def get_user_list_with_area_and_birth(self, area, birth,height, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from user where hometown like '%%%s%%' and left(birthday,4)>=%s and height>%s limit %s,%s
+                            select * from userinfo where hometown like '%%%s%%' and left(birthday,4)>=%s and height>%s limit %s,%s
                             ''' % (area, birth, height,start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -240,7 +254,7 @@ class DscDatasource(object):
     def get_user_list_with_hobby(self, hobby, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from user where hobby like '%%%s%%' limit %s,%s
+                            select * from userinfo where hobby like '%%%s%%' limit %s,%s
                             ''' % (hobby, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -248,11 +262,20 @@ class DscDatasource(object):
         print(query_result)
         return query_result
 
+    def get_user_with_name(self,name, start, count):
+        query_user_list = ''' 
+                                  select * from userinfo where id = '%s' limit %s,%s
+                                  ''' % (name, start, count)
+        print(query_user_list)
+        self.cursor.execute(query_user_list)
+        query_result = self.cursor.fetchall()
+        print(query_result)
+        return query_result
     def get_user_list_with_company_and_birth(self, company, birthday):
         self.pingDb()
 
         query_user_list = ''' 
-                            select * from user where company like '%%%s%%' and birthday like '%s%%'
+                            select * from userinfo where company like '%%%s%%' and birthday like '%s%%'
                             ''' % (company, birthday)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -265,3 +288,6 @@ ds = DscDatasource()
 #
 # query_result = ds.get_user_list_with_area_and_birth('湛江','199',1,1000)
 # print(len(query_result))
+
+# ds.get_user_with_name('117302',1,100)
+# print(ds.get_user_with_complicate('','1996',0,'丽芳',""))

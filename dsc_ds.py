@@ -61,9 +61,9 @@ class DscDatasource(object):
                 user['height'],
                 user['weight'], user['characters'], user['station'], user['company'], user['hobby'], user['referee_id'],
                 user['referee_name'])
-            print(sql)
             result = self.cursor.execute(sql)
             if result > 0:
+                print(sql)
                 print(
                     "%s , %s,%s %s(cm),%s(kg)" % (
                         user['name'], user['birthday'], user['city'], user['height'], user['weight']))

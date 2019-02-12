@@ -25,7 +25,7 @@ cursor = db.cursor()
 
 # cursor.execute(create_table_sql)
 class Header:
-    token = "47cf6eb01b5cec4e75ced7e8b8afa02f"
+    token = "5a91dca08e54033fbf9c6ada9e25b299"
     app_version = "3.5.0"
     pass
 
@@ -90,7 +90,8 @@ def get_user_info(id):
             get_user_info(id)
         else:
             if data['sex'] == 'female':
-                ds.update_user_time(id,data['update_time'].split(' ')[0])
+                ds.insert(data)
+                # ds.update_user_time(id,data['update_time'].split(' ')[0])
     except Exception as e:
         print(e)
         pass
@@ -110,7 +111,7 @@ def update_user_list(start, count):
         print(e)
 
 
-update_user_list(1, 100)
+# update_user_list(1, 100)
 
 
 def login_oper(name, password):
@@ -166,4 +167,4 @@ def get_user_page(feedid):
     except  Exception as e:
         pass
 
-# get_user_page("0")
+get_user_page("0")

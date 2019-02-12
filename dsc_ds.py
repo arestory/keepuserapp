@@ -50,8 +50,9 @@ class DscDatasource(object):
             pass
 
     def insert(self, user):
+
+        self.db.ping(reconnect=True)
         try:
-            self.db.ping(reconnect=True)
             sql = self.insert_user_sql % (
                 user['id'], user['name'], user['os_type'], user['birthday'], user['update_time'], user['city'],
                 user['sex'], user['birthpet'],
@@ -60,6 +61,7 @@ class DscDatasource(object):
                 user['height'],
                 user['weight'], user['characters'], user['station'], user['company'], user['hobby'], user['referee_id'],
                 user['referee_name'])
+            print(sql)
             result = self.cursor.execute(sql)
             if result > 0:
                 print(
@@ -68,7 +70,7 @@ class DscDatasource(object):
             self.db.commit()
 
         except Exception as e:
-            print(e)
+            # print(e)
             pass
 
     # 获取用户详情

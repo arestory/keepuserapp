@@ -51,8 +51,9 @@ class DscDatasource(object):
 
     def insert(self, user):
 
-        self.db.ping(reconnect=True)
         try:
+
+            self.db.ping(reconnect=True)
             sql = self.insert_user_sql % (
                 user['id'], user['name'], user['os_type'], user['birthday'], user['update_time'], user['city'],
                 user['sex'], user['birthpet'],

@@ -1,6 +1,5 @@
 # coding=UTF-8
 import pymysql.cursors
-
 import time, datetime
 import numpy
 import requests
@@ -36,6 +35,10 @@ class DscDatasource(object):
     def pingDb(self):
         self.db.ping(reconnect=True)
 
+    def execute_sql(self,sql):
+        self.cursor.execute(sql)
+        self.db.commit()
+
     def update_user_time(self,userId,update_time):
         try:
             self.db.ping(reconnect=True)
@@ -51,6 +54,8 @@ class DscDatasource(object):
 
     def insert(self, user):
 
+        print(user)
+        print('-----')
         try:
 
             self.db.ping(reconnect=True)
@@ -62,17 +67,26 @@ class DscDatasource(object):
                 user['height'],
                 user['weight'], user['characters'], user['station'], user['company'], user['hobby'], user['referee_id'],
                 user['referee_name'])
+
+            print(sql)
             result = self.cursor.execute(sql)
+            print("sql 结果 :%s" % result)
             if result > 0:
-                print(sql)
                 print(
                     "%s , %s,%s %s(cm),%s(kg)" % (
                         user['name'], user['birthday'], user['city'], user['height'], user['weight']))
-            self.db.commit()
+                self.db.commit()
 
         except Exception as e:
-            # print(e)
+            print(e)
             pass
+
+    def execute_sql(self,sql):
+        print(sql)
+        result = self.cursor.execute(sql)
+        self.db.commit()
+        print("sql 结果 %s" % result)
+
 
     # 获取用户详情
     def get_user_info(self, userId):
@@ -287,7 +301,15 @@ class DscDatasource(object):
         return query_result
 
 #
-ds = DscDatasource()
+# ds = DscDatasource()
+
+# ds.execute_sql('''
+# insert ignore INTO userinfo (id,name,os_type,birthday,update_time,city,sex,birthpet,avatar,education,university,
+#     star_sign,ideal_mate,hometown,height,weight,characters ,station,company,hobby,referee_id,referee_name)   VALUES (
+#     '104211','况招霞','ios','1987-10-29','2019-02-15 22:02:09','深圳','female','4','https://release.image.dscapp.dscun.com/avatar/B4F7C8B1-4310-4907-BC53-B67A6CE5544F.jpg','硕士','STU','天蝎座','善良纯粹乐观平和','江西 宜春','158','41','对未来充满了好奇，最好奇的事情还是你会是谁。','医生','深圳某医院','读书骑行徒步爬山花草茶诗','1','杨村长')
+#
+#
+# ''')
 #
 # query_result = ds.get_user_list_with_area_and_birth('湛江','199',1,1000)
 # print(len(query_result))

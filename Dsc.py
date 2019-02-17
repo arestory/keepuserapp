@@ -25,7 +25,7 @@ cursor = db.cursor()
 
 # cursor.execute(create_table_sql)
 class Header:
-    token = "5a91dca08e54033fbf9c6ada9e25b299"
+    token = "88f0a8f26e408b21ea66ccd4118775a5"
     app_version = "3.5.0"
     pass
 
@@ -83,7 +83,7 @@ def get_user_info(id):
         content = r.content.decode('utf-8')
         js = json.loads(content)
         data = js["data"]
-        print(js)
+
         if js['code'] == 10003:
             newUser = login_oper("15920419761", "yuwenque")
             header.token = newUser['data']['token']
@@ -146,6 +146,7 @@ def get_user_page(feedid):
             data = js["data"]
             if len(data) > 0:
                 feeds = data['feeds']
+
                 last_feed_id = feeds[len(feeds) - 1]['feeds_id']
                 for item in feeds:
                     user_id = item['user_id']
@@ -165,6 +166,7 @@ def get_user_page(feedid):
                 timer.start()
         pass
     except  Exception as e:
+        print(e)
         pass
 
 get_user_page("0")

@@ -28,9 +28,9 @@ class GupiaoDs(object):
         return []
 
     # 查询数据库是否存在9.25的记录
-    def get_gp_info_on925(self, id):
+    def get_gp_info_on925_table(self, id):
         time_stamp = time.strftime('%Y-%m-%d', time.localtime(time.time()))
-        time_stamp = time_stamp+",09:25"
+        time_stamp = time_stamp + ",09:25"
         sql = 'select * from stock_925 where id ="%s" and create_time = "%s"' % (id, time_stamp)
         print(sql)
         self.cursor.execute(sql)
@@ -38,7 +38,7 @@ class GupiaoDs(object):
 
     def get_gp_info_on_time(self, id):
         start = id[0:1]
-        if start == '3' or start == '0':
+        if start == '3' or start == '0' or start == '1' or start == '2':
             url = self.index_url % ('sz', id)
 
         elif start == '6':
@@ -49,18 +49,22 @@ class GupiaoDs(object):
         # r = requests.request("GET",url)
         content = str(r.read().decode('gbk'))
         arr = str(content).split(',')
-        arr[0] = arr[0].split("\"")[1]
+        if len(arr) > 1:
+            arr[0] = arr[0].split("\"")[1]
 
-        call_auction = arr[8]
-        index = len(arr) - 1
-        date = arr[index - 2]
-        time_minute = arr[index - 1][0:5]
-        timestamp = date + "," + time_minute
-        map = {'id': id, 'name': arr[0], 'call_auction': int(call_auction), 'create_time': timestamp}
-        # 保存9。25的数据
-        if time_minute == '09:25':
-            self.add_stock925(id, arr[0], call_auction, timestamp)
-        return map
+            call_auction = arr[8]
+            index = len(arr) - 1
+            date = arr[index - 2]
+            time_minute = arr[index - 1][0:5]
+            timestamp = date + "," + time_minute
+            map = {'id': id, 'name': arr[0], 'call_auction': int(call_auction), 'create_time': timestamp}
+            # 保存9。25的数据
+            if time_minute == '09:25':
+                self.add_stock925(id, arr[0], call_auction, timestamp)
+                return map
+        else:
+            map = {'id': id, 'name': '未知/不存在该股票：'+id, 'call_auction': int(1), 'create_time': '1970-01-01'}
+            return map
 
     def add_stock925(self, code, name, call_auction, time_stamp):
         try:
@@ -75,10 +79,12 @@ class GupiaoDs(object):
             result = -1
         return result
 
-
-    def add_stock(self, code, name, vol_on_up):
+    def add_stock(self, code, name, vol_on_up,create_time):
         try:
-            time_stamp = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+            if not create_time:
+                time_stamp = time.strftime('%Y-%m-%d', time.localtime(time.time()))
+            else:
+                time_stamp=create_time
             sql = '''
                 replace into stock_yes(id,name,vol_on_up,create_time) values ('%s','%s',%s,'%s')
             ''' % (code, name, int(vol_on_up), time_stamp)
@@ -89,6 +95,25 @@ class GupiaoDs(object):
         except Exception as e:
             result = -1
         return result
+
+    def delete_today_add_stock(self, code):
+        sql = '''
+            delete from stock_yes where id = '%s'
+        ''' % code
+        result = self.cursor.execute(sql)
+        self.db.commit()
+        return result
+
+    def query_today_add_stocks(self):
+        now_time = datetime.datetime.now()  # 获取当前时间
+        todaytime = now_time.strftime('%Y-%m-%d')  # 格式化
+        # 获取昨天的数据
+        sql = '''
+                   select * from stock_yes where create_time ='%s'
+               ''' % todaytime
+        self.cursor.execute(sql)
+        result_list = self.cursor.fetchall()
+        return result_list
 
     def query_yesterday_stock(self):
         now_time = datetime.datetime.now()  # 获取当前时间

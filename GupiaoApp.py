@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import make_response
-import json
+import json,time
 
 from GupiaoDataSource import GupiaoDs
 
@@ -14,8 +14,9 @@ def add_stock():
     code = request.args.get("id")
     name = request.args.get("name")
     vol = request.args.get("vol")
+    create_time = request.args.get("create_time")
     if code and name and vol:
-        result = ds.add_stock(code, name, vol)
+        result = ds.add_stock(code, name, vol,create_time)
         if result == -1:
             map_result = {'code': -1, 'msg': '添加失败'}
 
@@ -25,6 +26,28 @@ def add_stock():
     else:
         map_result = {'code': -100, 'msg': '缺少参数，请检查'}
     result = json.dumps(map_result, ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
+    return make_response(result)
+
+
+@app.route('/deleteTodayAddStock')
+def delete_today_add_stock():
+    code = request.args.get('id')
+    ds.delete_today_add_stock(code)
+    map_result = {'code': 200, 'msg': '删除成功'}
+    result = json.dumps(map_result, ensure_ascii=False)
+    jsonp = request.args.get("jsonpCallback")
+    if jsonp:
+        return "%s(%s)" % (jsonp, result)
+    return make_response(result)
+
+
+@app.route('/queryTodayStocks')
+def query_today_stocks():
+    stock_list = ds.query_today_add_stocks()
+    result = json.dumps(stock_list, ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
@@ -43,20 +66,23 @@ def query_stock_list():
 
 @app.route('/add_stock_list')
 def add_stock_list():
-
     stocks = json.loads(request.args.get("list"))
     print(stocks)
+    create_time = request.args.get("create_time")
+    if not create_time:
+        create_time = time.strftime('%Y-%m-%d', time.localtime(time.time()))
 
     for stock in stocks:
         # 添加到数据库
-        ds.add_stock(stock['code'],stock['name'],stock['vol_on_up'])
+        ds.add_stock(stock['code'], stock['name'], stock['vol_on_up'],create_time)
 
-    result = json.dumps({'code':200,'msg':'成功'}, ensure_ascii=False)
+    result = json.dumps({'code': 200, 'msg': '成功'}, ensure_ascii=False)
 
     jsonp = request.args.get("jsonpCallback")
     if jsonp:
         return "%s(%s)" % (jsonp, result)
     return make_response(result)
+
 
 @app.route('/query925stocks')
 def query925stocks():
@@ -65,14 +91,16 @@ def query925stocks():
     result = []
     for stock in stock_list:
         # 查看数据是否已经存在记录
-        detail = ds.get_gp_info_on925(stock['id'])
+        detail = ds.get_gp_info_on925_table(stock['id'])
         if not detail:
             detail = ds.get_gp_info_on_time(stock['id'])
-        vol = stock['vol_on_up']
-        call_auction = detail['call_auction']
-        percent = call_auction/vol
-        result_map = {'id': stock['id'], 'name': stock['name'], 'create_time': detail['create_time'],'vol_on_up':vol,'call_auction':call_auction, 'percent': round(percent,2)}
-        result.append(result_map)
+        if detail:
+            vol = stock['vol_on_up']
+            call_auction = detail['call_auction']
+            percent = call_auction / vol
+            result_map = {'id': stock['id'], 'name': stock['name'], 'create_time': detail['create_time'], 'vol_on_up': vol,
+                          'call_auction': call_auction, 'percent': round(percent, 2)}
+            result.append(result_map)
 
     result = json.dumps(result, ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66a18558-65e1-45f3-940b-61c6a91f5188" name="Default Changelist" comment="" />
+    <list default="true" id="66a18558-65e1-45f3-940b-61c6a91f5188" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/GupiaoApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/GupiaoApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GupiaoDataSource.py" beforeDir="false" afterPath="$PROJECT_DIR$/GupiaoDataSource.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,7 +15,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/flask$Dsc.coverage" NAME="Dsc Coverage Results" MODIFIED="1550239823191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$DyApp.coverage" NAME="DyApp Coverage Results" MODIFIED="1546068852100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flask$GupiaoApp.coverage" NAME="GupiaoApp Coverage Results" MODIFIED="1550397191327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gupiao" />
+    <SUITE FILE_PATH="coverage/flask$GupiaoApp.coverage" NAME="GupiaoApp Coverage Results" MODIFIED="1550408090376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gupiao" />
     <SUITE FILE_PATH="coverage/flask$dsc_ds.coverage" NAME="dsc_ds Coverage Results" MODIFIED="1550239684988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$keepapp.coverage" NAME="keepapp Coverage Results" MODIFIED="1546224549324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$DscApp__1_.coverage" NAME="DscApp (1) Coverage Results" MODIFIED="1549808508905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -127,11 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GupiaoApp.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gupiao/GupiaoApp.py">
+      <file leaf-file-name="GupiaoApp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="66" column="22" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="22" />
+            <state relative-caret-position="235">
+              <caret line="74" column="23" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="23" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -139,11 +142,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GupiaoDataSource.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gupiao/GupiaoDataSource.py">
+      <file leaf-file-name="GupiaoDataSource.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            <state relative-caret-position="378">
+              <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -228,6 +231,8 @@
         <option value="$PROJECT_DIR$/dsc_ds.py" />
         <option value="$PROJECT_DIR$/gupiao/GupiaoDataSource.py" />
         <option value="$PROJECT_DIR$/gupiao/GupiaoApp.py" />
+        <option value="$PROJECT_DIR$/GupiaoApp.py" />
+        <option value="$PROJECT_DIR$/GupiaoDataSource.py" />
       </list>
     </option>
   </component>
@@ -269,11 +274,6 @@
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="keepuserapp" type="cbb8eebc:String" user="keepuserapp" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="keepuserapp" type="cbb8eebc:String" user="keepuserapp" />
-              <item name="gupiao" type="cbb8eebc:String" user="gupiao" />
             </path>
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
@@ -450,6 +450,7 @@
       <recent name="$PROJECT_DIR$/keepmap" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/html" />
     </key>
   </component>
@@ -517,7 +518,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gupiao/GupiaoApp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GupiaoApp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -536,7 +537,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gupiao/GupiaoDataSource.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GupiaoDataSource.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -632,6 +633,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -639,7 +641,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.38164756" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.31803963" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30448383" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30448383" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20818071" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -647,7 +649,7 @@
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.8730469" weight="0.26824033" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.35974973" />
+      <window_info active="true" anchor="bottom" id="Debug" order="5" visible="true" weight="0.35974973" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -735,11 +737,21 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="170" />
+      <option name="time" value="178" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>time_minute</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>len(arr)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>request.args.get(&quot;list&quot;)</expression-string>
         <language-id>Python</language-id>
@@ -772,16 +784,6 @@
       </expression>
       <expression>
         <expression-string>request.args.get('list')</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>result</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.cursor.execute(sql)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -1097,22 +1099,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gupiao/GupiaoDataSource.py">
+    <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        <state relative-caret-position="235">
+          <caret line="74" column="23" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="23" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gupiao/GupiaoApp.py">
+    <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="66" column="22" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="22" />
+        <state relative-caret-position="378">
+          <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -46,7 +46,8 @@ def delete_today_add_stock():
 
 @app.route('/queryTodayStocks')
 def query_today_stocks():
-    stock_list = ds.query_today_add_stocks()
+    date = request.args.get('date')
+    stock_list = ds.query_today_add_stocks(date)
     result = json.dumps(stock_list, ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
     if jsonp:

@@ -62,6 +62,7 @@ class GupiaoDs(object):
             if time_minute == '09:25':
                 self.add_stock925(id, arr[0], call_auction, timestamp)
                 return map
+            return map
         else:
             map = {'id': id, 'name': '未知/不存在该股票：'+id, 'call_auction': int(1), 'create_time': '1970-01-01'}
             return map
@@ -104,13 +105,22 @@ class GupiaoDs(object):
         self.db.commit()
         return result
 
-    def query_today_add_stocks(self):
-        now_time = datetime.datetime.now()  # 获取当前时间
-        todaytime = now_time.strftime('%Y-%m-%d')  # 格式化
+    def query_add_stocks_with_date(self,date):
+        sql = ''' select * from stock_yes where create_time ='%s'
+                     ''' % date
+        self.cursor.execute(sql)
+        result_list = self.cursor.fetchall()
+        return result_list
+
+    def query_today_add_stocks(self,date):
+        if not date:
+            now_time = datetime.datetime.now()  # 获取当前时间
+            date = now_time.strftime('%Y-%m-%d')  # 格式化
+
         # 获取昨天的数据
         sql = '''
-                   select * from stock_yes where create_time ='%s'
-               ''' % todaytime
+                   select * from stock_yes where create_time ="%s"
+               ''' % date
         self.cursor.execute(sql)
         result_list = self.cursor.fetchall()
         return result_list

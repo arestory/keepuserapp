@@ -3,7 +3,7 @@ from flask import request
 from flask import make_response
 import json
 
-from gupiao.GupiaoDataSource import GupiaoDs
+from GupiaoDataSource import GupiaoDs
 
 app = Flask(__name__, static_url_path='')
 ds = GupiaoDs()

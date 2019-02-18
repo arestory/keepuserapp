@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66a18558-65e1-45f3-940b-61c6a91f5188" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/GupiaoApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/GupiaoApp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GupiaoDataSource.py" beforeDir="false" afterPath="$PROJECT_DIR$/GupiaoDataSource.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -133,8 +132,8 @@
       <file leaf-file-name="GupiaoApp.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="74" column="23" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="23" />
+            <state relative-caret-position="167">
+              <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -145,8 +144,8 @@
       <file leaf-file-name="GupiaoDataSource.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+            <state relative-caret-position="398">
+              <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -640,7 +639,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.38164756" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31803963" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31803963" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.30448383" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20818071" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -649,7 +648,7 @@
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.8730469" weight="0.26824033" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="5" visible="true" weight="0.35974973" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.5641293" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -729,6 +728,36 @@
           <line>168</line>
           <option name="timeStamp" value="163" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GupiaoDataSource.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="178" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GupiaoDataSource.py</url>
+          <line>110</line>
+          <option name="timeStamp" value="179" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GupiaoApp.py</url>
+          <line>90</line>
+          <option name="timeStamp" value="180" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GupiaoDataSource.py</url>
+          <line>119</line>
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GupiaoDataSource.py</url>
+          <line>121</line>
+          <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GupiaoDataSource.py</url>
+          <line>124</line>
+          <option name="timeStamp" value="184" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -737,11 +766,30 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="178" />
+      <option name="time" value="185" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
+    <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>'''
+           select * from stock_yes where create_time ='%s'
+       ''' % yes_time</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+    </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>yes_time</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(now_time - 1 * Day()).strftime('%Y-%m-%d')</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>time_minute</expression-string>
         <language-id>Python</language-id>
@@ -774,16 +822,6 @@
       </expression>
       <expression>
         <expression-string>request.args.list</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>request.args.lists()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>request.args.get('list')</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -1101,8 +1139,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="74" column="23" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="23" />
+        <state relative-caret-position="167">
+          <caret line="95" column="33" selection-start-line="95" selection-start-column="33" selection-end-line="95" selection-end-column="33" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -1111,8 +1149,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="65" column="52" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+        <state relative-caret-position="398">
+          <caret line="63" column="26" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

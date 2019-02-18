@@ -120,7 +120,7 @@ class GupiaoDs(object):
         yes_time = (now_time - 1 * Day()).strftime('%Y-%m-%d')  # 格式化
         # 获取昨天的数据
         sql = '''
-            select * from stock_yes where create_time ='%s'
+            select * from stock_yes where create_time ="%s"
         ''' % yes_time
         self.cursor.execute(sql)
         result_list = self.cursor.fetchall()

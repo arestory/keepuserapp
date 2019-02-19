@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66a18558-65e1-45f3-940b-61c6a91f5188" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Dsc.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dsc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GupiaoDataSource.py" beforeDir="false" afterPath="$PROJECT_DIR$/GupiaoDataSource.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dsc_ds.py" beforeDir="false" afterPath="$PROJECT_DIR$/dsc_ds.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -134,8 +132,8 @@
       <file leaf-file-name="GupiaoApp.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="96" column="30" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="30" />
+            <state relative-caret-position="66">
+              <caret line="91" selection-start-line="91" selection-end-line="91" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -170,8 +168,8 @@
       <file leaf-file-name="GupiaoDataSource.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+            <state relative-caret-position="323">
+              <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -216,13 +214,13 @@
       <find>quer</find>
       <find>get_user_list_with_area_and_birth</find>
       <find>119.139.35.122</find>
-      <find />
+      <find>user</find>
       <find>exec</find>
       <find>db</find>
       <find>queryto</find>
     </findStrings>
     <replaceStrings>
-      <replace />
+      <replace>userinfo</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -665,8 +663,8 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.38164756" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5172054" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.30448383" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.5172054" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30448383" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20818071" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
@@ -754,6 +752,11 @@
           <line>91</line>
           <option name="timeStamp" value="180" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GupiaoDataSource.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="186" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -762,18 +765,30 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="186" />
+      <option name="time" value="187" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string />
+        <expression-string>'''
+           select * from stock_yes where create_time ='%s'
+       ''' % yes_time</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>time_minute == '15:00'</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>time_minute == '09:25'</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>user['update_time'][0:10]</expression-string>
         <language-id>Python</language-id>
@@ -785,7 +800,7 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string />
+        <expression-string>(now_time - 1 * Day()).strftime('%Y-%m-%d')</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -806,16 +821,6 @@
       </expression>
       <expression>
         <expression-string>request.args.get('list[0][name]')</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>request</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>request.args</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -1133,8 +1138,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="96" column="30" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="30" />
+        <state relative-caret-position="66">
+          <caret line="91" selection-start-line="91" selection-end-line="91" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -1143,8 +1148,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+        <state relative-caret-position="323">
+          <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

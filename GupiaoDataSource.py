@@ -64,13 +64,13 @@ class GupiaoDs(object):
                 if time_minute == '09:25':
                     self.add_stock925(id, arr[0], call_auction, timestamp)
                     return map
-                return map
+                return None
             else:
                 map = {'id': id, 'name': '未知/不存在该股票：'+id, 'call_auction': int(1), 'create_time': '1970-01-01'}
                 return map
 
         except Exception as e:
-            return {}
+            return None
 
 
     def add_stock925(self, code, name, call_auction, time_stamp):

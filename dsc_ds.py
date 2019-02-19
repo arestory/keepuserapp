@@ -8,14 +8,36 @@ import json
 
 
 class DscDatasource(object):
-    db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
+    # db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
+    #                      cursorclass=pymysql.cursors.DictCursor)
+    db = pymysql.connect("localhost", 'root', 'yuwenque', 'dsc', charset='utf8mb4', port=3306,
                          cursorclass=pymysql.cursors.DictCursor)
     cursor = db.cursor()
 
     insert_user_sql = '''insert ignore INTO userinfo (id,name,os_type,birthday,update_time,city,sex,birthpet,avatar,education,university,
     star_sign,ideal_mate,hometown,height,weight,characters ,station,company,hobby,referee_id,referee_name)   VALUES (
-    '%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s') '''
+    "%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s") '''
 
+
+    sql1='''
+     select count(*) as num ,left(name,1) as first from userinfo group by left(name,1) order by num desc
+    '''
+    sql2='''
+    select count(*) as num ,right(name,1) as lastname from userinfo where birthday like '199%' group by lastname order by num desc;
+
+    '''
+    sql3 = '''
+    select count(*) as num,university from userinfo where birthday like '199%' group by university  order by num desc
+    '''
+
+    sql4 = '''
+    select count(*) as num ,left(birthday,4) as birth from userinfo where education ='硕士' group by birth order by num desc;
+    
+    '''
+
+    sql5='''
+    select count(*) as num,education from userinfo group by education order by num desc;
+    '''
     birthpetMap = {
 
         '鼠': '1',
@@ -42,7 +64,7 @@ class DscDatasource(object):
     def update_user_time(self,userId,update_time):
         try:
             self.db.ping(reconnect=True)
-            sql = '''update userinfo set update_time = '%s' where id = "%s" ''' % (update_time,userId)
+            sql = '''update userinfo set update_time = "%s" where id = "%s" ''' % (update_time,userId)
             result = self.cursor.execute(sql)
             self.db.commit()
             if result == 1:
@@ -59,8 +81,9 @@ class DscDatasource(object):
         try:
 
             self.db.ping(reconnect=True)
+
             sql = self.insert_user_sql % (
-                user['id'], user['name'], user['os_type'], user['birthday'], user['update_time'], user['city'],
+                user['id'], user['name'], user['os_type'], user['birthday'], user['update_time'][0:10], user['city'],
                 user['sex'], user['birthpet'],
                 user['avatar'], user['education'], user['university'], user['star_sign'], user['ideal_mate'],
                 user['hometown'],
@@ -149,7 +172,7 @@ class DscDatasource(object):
     def get_user_list_with_birthpet(self, pet, start, count):
         self.pingDb()
         query_user_list = ''' 
-                     select * from userinfo where birthpet ='%s' limit %s,%s
+                     select * from userinfo where birthpet ="%s" limit %s,%s
                      ''' % (pet, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -197,7 +220,7 @@ class DscDatasource(object):
     def get_user_list_star_sign(self, star_sign, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from userinfo where star_sign='%s' limit %s,%s
+                            select * from userinfo where star_sign="%s" limit %s,%s
                             ''' % (star_sign, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -209,7 +232,7 @@ class DscDatasource(object):
     def get_user_list_with_education(self, education, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from userinfo where education='%s' limit %s,%s
+                            select * from userinfo where education="%s" limit %s,%s
                             ''' % (education, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -221,7 +244,7 @@ class DscDatasource(object):
     def get_user_list_with_university(self, university, start, count):
         self.pingDb()
         query_user_list = ''' 
-                            select * from userinfo where university='%s' limit %s,%s
+                            select * from userinfo where university="%s" limit %s,%s
                             ''' % (university, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)
@@ -281,7 +304,7 @@ class DscDatasource(object):
 
     def get_user_with_name(self,name, start, count):
         query_user_list = ''' 
-                                  select * from userinfo where id = '%s' limit %s,%s
+                                  select * from userinfo where id = "%s" limit %s,%s
                                   ''' % (name, start, count)
         print(query_user_list)
         self.cursor.execute(query_user_list)

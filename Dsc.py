@@ -25,7 +25,7 @@ cursor = db.cursor()
 
 # cursor.execute(create_table_sql)
 class Header:
-    token = "88f0a8f26e408b21ea66ccd4118775a5"
+    token = "417f3e9982e0f09ebff72f6314e0fa2c"
     app_version = "3.5.0"
     pass
 

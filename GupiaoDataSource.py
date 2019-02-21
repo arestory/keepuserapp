@@ -8,7 +8,7 @@ from pandas.tseries.offsets import Day
 class GupiaoDs(object):
     index_url = 'http://hq.sinajs.cn/list=%s%s'
 
-    db = pymysql.connect("212.64.93.216", 'root', 'yuwenque', 'mago', charset='utf8mb4', autocommit=True)
+    db = pymysql.connect("localhost", 'root', 'yuwenque', 'mago', charset='utf8mb4', autocommit=True)
 
     cursor = db.cursor(pymysql.cursors.DictCursor)
 

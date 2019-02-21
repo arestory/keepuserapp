@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66a18558-65e1-45f3-940b-61c6a91f5188" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GupiaoApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/GupiaoApp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GupiaoDataSource.py" beforeDir="false" afterPath="$PROJECT_DIR$/GupiaoDataSource.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,7 +14,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/flask$Dsc.coverage" NAME="Dsc Coverage Results" MODIFIED="1550583563536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$DyApp.coverage" NAME="DyApp Coverage Results" MODIFIED="1546068852100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flask$GupiaoApp.coverage" NAME="GupiaoApp Coverage Results" MODIFIED="1550751110574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gupiao" />
+    <SUITE FILE_PATH="coverage/flask$GupiaoApp.coverage" NAME="GupiaoApp Coverage Results" MODIFIED="1550752263882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gupiao" />
     <SUITE FILE_PATH="coverage/flask$dsc_ds.coverage" NAME="dsc_ds Coverage Results" MODIFIED="1550239684988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$keepapp.coverage" NAME="keepapp Coverage Results" MODIFIED="1546224549324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$DscApp__1_.coverage" NAME="DscApp (1) Coverage Results" MODIFIED="1549808508905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -134,8 +132,8 @@
       <file leaf-file-name="GupiaoApp.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="101" column="27" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="27" />
+            <state relative-caret-position="170">
+              <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -158,7 +156,7 @@
       <file leaf-file-name="Dsc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Dsc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="686">
+            <state relative-caret-position="388">
               <caret line="165" column="29" lean-forward="true" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -170,8 +168,8 @@
       <file leaf-file-name="GupiaoDataSource.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
+            <state relative-caret-position="150">
+              <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -190,7 +188,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>map</find>
       <find>movie/detail</find>
       <find>contai</find>
       <find>detail</find>
@@ -218,8 +215,9 @@
       <find>119.139.35.122</find>
       <find>user</find>
       <find>exec</find>
-      <find>db</find>
       <find>queryto</find>
+      <find>db</find>
+      <find>query_ye</find>
     </findStrings>
     <replaceStrings>
       <replace>userinfo</replace>
@@ -1120,7 +1118,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Dsc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="686">
+        <state relative-caret-position="388">
           <caret line="165" column="29" lean-forward="true" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -1130,8 +1128,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="101" column="27" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="27" />
+        <state relative-caret-position="170">
+          <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -1140,8 +1138,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
+        <state relative-caret-position="150">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

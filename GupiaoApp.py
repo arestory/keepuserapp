@@ -90,21 +90,25 @@ def query925stocks():
     # 获取昨天记录的股票数据
     stock_list = ds.query_yesterday_stock()
     result = []
-    for stock in stock_list:
-        # 查看数据是否已经存在记录
-        detail = ds.get_gp_info_on925_table(stock['id'])
-        if not detail:
-            detail = ds.get_gp_info_on_time(stock['id'])
-        if detail:
-            vol = stock['vol_on_up']
-            call_auction = detail['call_auction']
-            percent = call_auction / vol
-            result_map = {'id': stock['id'], 'name': stock['name'], 'create_time': detail['create_time'], 'vol_on_up': vol,
-                          'call_auction': call_auction, 'percent': round(percent, 2)}
-            result.append(result_map)
-
-    result = json.dumps(result, ensure_ascii=False)
     jsonp = request.args.get("jsonpCallback")
+
+    if len(stock_list)>0:
+        for stock in stock_list:
+            # 查看数据是否已经存在记录
+            detail = ds.get_gp_info_on925_table(stock['id'])
+            if not detail:
+                detail = ds.get_gp_info_on_time(stock['id'])
+            if detail:
+                vol = stock['vol_on_up']
+                call_auction = detail['call_auction']
+                percent = call_auction / vol
+                result_map = {'id': stock['id'], 'name': stock['name'], 'create_time': detail['create_time'], 'vol_on_up': vol,
+                              'call_auction': call_auction, 'percent': round(percent, 2)}
+                result.append(result_map)
+
+        result = json.dumps(result, ensure_ascii=False)
+    else:
+        result = json.dumps([], ensure_ascii=False)
     if jsonp:
         return "%s(%s)" % (jsonp, result)
     return make_response(result)

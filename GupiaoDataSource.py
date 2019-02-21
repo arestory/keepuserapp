@@ -93,7 +93,7 @@ class GupiaoDs(object):
             else:
                 time_stamp=create_time
             sql = '''
-                replace into stock_yes(id,name,vol_on_up,create_time) values ('%s','%s',%s,'%s')
+                insert ignore into stock_yes(id,name,vol_on_up,create_time) values ('%s','%s',%s,'%s')
             ''' % (code, name, int(vol_on_up), time_stamp)
             print(sql)
             result = self.cursor.execute(sql)

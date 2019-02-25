@@ -101,7 +101,7 @@ def query925stocks():
             if detail:
                 vol = stock['vol_on_up']
                 call_auction = detail['call_auction']
-                percent = call_auction / vol
+                percent = call_auction / (vol*100)
                 result_map = {'id': stock['id'], 'name': stock['name'], 'create_time': detail['create_time'], 'vol_on_up': vol,
                               'call_auction': call_auction, 'percent': round(percent, 2)}
                 result.append(result_map)
@@ -125,7 +125,7 @@ def judge_stock_with_condition():
 
         vol_on_up = item_on_sql['vol_on_up']
         call_auction = item_on_time['call_auction']
-        percent = call_auction / vol_on_up
+        percent = call_auction / (vol_on_up*100)
         print(percent)
         map = {'id': code, 'name': item_on_sql['name'], 'vol_on_up': vol_on_up, 'call_auction': call_auction,
                'percent': percent}

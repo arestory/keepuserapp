@@ -127,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GupiaoApp.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GupiaoApp.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+            <state relative-caret-position="306">
+              <caret line="130" column="32" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="32" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -163,11 +163,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GupiaoDataSource.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GupiaoDataSource.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+            <state relative-caret-position="-349">
+              <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -186,7 +186,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>movie/detail</find>
       <find>contai</find>
       <find>detail</find>
       <find>query_nearby_trains_sql</find>
@@ -214,8 +213,9 @@
       <find>user</find>
       <find>exec</find>
       <find>queryto</find>
-      <find>db</find>
       <find>query_ye</find>
+      <find>db</find>
+      <find>percen</find>
     </findStrings>
     <replaceStrings>
       <replace>userinfo</replace>
@@ -252,8 +252,8 @@
         <option value="$PROJECT_DIR$/gupiao/GupiaoApp.py" />
         <option value="$PROJECT_DIR$/Dsc.py" />
         <option value="$PROJECT_DIR$/dsc_ds.py" />
-        <option value="$PROJECT_DIR$/GupiaoApp.py" />
         <option value="$PROJECT_DIR$/GupiaoDataSource.py" />
+        <option value="$PROJECT_DIR$/GupiaoApp.py" />
       </list>
     </option>
   </component>
@@ -487,7 +487,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.DscApp (1)">
+  <component name="RunManager" selected="Python.GupiaoApp">
     <configuration name="Dsc" type="PythonConfigurationType" factoryName="Python">
       <module name="keepuserapp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -660,7 +660,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.38164756" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5172054" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3232534" />
       <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.30448383" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20818071" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -1123,22 +1123,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
+    <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+        <state relative-caret-position="-349">
+          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GupiaoDataSource.py">
+    <entry file="file://$PROJECT_DIR$/GupiaoApp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        <state relative-caret-position="306">
+          <caret line="130" column="32" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="32" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

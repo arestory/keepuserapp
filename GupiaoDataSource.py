@@ -153,32 +153,32 @@ class GupiaoDs(object):
         self.db.commit()
 
 
-ds = GupiaoDs()
-# ds.get_stock_list_detail(['300263', '600267', '300262', '600266', '300261', '600265'])
-ds.execute_sql('''
-
-replace into stock_925(id,name,call_auction,create_time) values ('600265','ST景谷',171388,'2019-02-17,09:25')
-''')
-ds.execute_sql('''
-                replace into stock_925(id,name,call_auction,create_time) values ('300261','雅本化学',2418823,'2019-02-17,09:25')
-''')
-ds.execute_sql('''
-                replace into stock_925(id,name,call_auction,create_time) values ('600266','北京城建',5894236,'2019-02-17,09:25')
-
-''')
-ds.execute_sql('''
-                replace into stock_925(id,name,call_auction,create_time) values ('300262','巴安水务',12172399,'2019-02-17,09:25')
-
-''')
-ds.execute_sql('''
-                replace into stock_925(id,name,call_auction,create_time) values ('600267','海正药业',11701781,'2019-02-17,09:25')
- 
-
-''')
-ds.execute_sql('''
-                replace into stock_925(id,name,call_auction,create_time) values ('300263','隆华科技',116328079,'2019-02-17,09:25')
-
-''')
+# ds = GupiaoDs()
+# # ds.get_stock_list_detail(['300263', '600267', '300262', '600266', '300261', '600265'])
+# ds.execute_sql('''
+#
+# replace into stock_925(id,name,call_auction,create_time) values ('600265','ST景谷',171388,'2019-02-17,09:25')
+# ''')
+# ds.execute_sql('''
+#                 replace into stock_925(id,name,call_auction,create_time) values ('300261','雅本化学',2418823,'2019-02-17,09:25')
+# ''')
+# ds.execute_sql('''
+#                 replace into stock_925(id,name,call_auction,create_time) values ('600266','北京城建',5894236,'2019-02-17,09:25')
+#
+# ''')
+# ds.execute_sql('''
+#                 replace into stock_925(id,name,call_auction,create_time) values ('300262','巴安水务',12172399,'2019-02-17,09:25')
+#
+# ''')
+# ds.execute_sql('''
+#                 replace into stock_925(id,name,call_auction,create_time) values ('600267','海正药业',11701781,'2019-02-17,09:25')
+#
+#
+# ''')
+# ds.execute_sql('''
+#                 replace into stock_925(id,name,call_auction,create_time) values ('300263','隆华科技',116328079,'2019-02-17,09:25')
+#
+# ''')
 # ds.create_tables()
 
 # ds.add_stock('300263', '隆华科技', '85814043')
